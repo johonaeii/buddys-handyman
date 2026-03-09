@@ -28,9 +28,35 @@ body {
 body {
   font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
   color: var(--ink-900);
-  background: linear-gradient(135deg, var(--sand-100), #fefcf9 50%, var(--sky-100));
+  background-color: #f8f2e8;
   line-height: 1.6;
   font-size: 18px;
+}
+
+#app {
+  position: relative;
+  min-height: 100vh;
+  isolation: isolate;
+}
+
+.parallax-bg {
+  position: fixed;
+  inset: -20vh 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("images/splash.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  transform: translate3d(0, 0, 0) scale(1.2);
+  will-change: transform;
+}
+
+.parallax-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 247, 235, 0.76), rgba(254, 252, 249, 0.72) 50%, rgba(233, 247, 251, 0.73));
 }
 
 a {
@@ -299,29 +325,6 @@ h1 {
   color: var(--ink-700);
 }
 
-.splash-figure {
-  margin: 0;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  background: var(--white);
-  border: 1px solid rgba(16, 36, 48, 0.1);
-  box-shadow: var(--card-shadow);
-}
-
-.splash-image {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  max-height: 560px;
-  object-fit: cover;
-  object-position: center;
-}
-
-.splash-figure figcaption {
-  padding: 0.9rem 1rem 1rem;
-  color: var(--ink-700);
-  font-weight: 600;
-}
-
 .text-link {
   font-weight: 700;
   color: var(--teal-600);
@@ -546,6 +549,11 @@ textarea:focus {
     font-size: 17px;
   }
 
+  .parallax-bg {
+    inset: -12vh 0;
+    background-position: center top;
+  }
+
   .container {
     width: min(100% - 1.2rem, var(--max));
   }
@@ -606,10 +614,6 @@ textarea:focus {
     padding: 0.9rem;
   }
 
-  .splash-image {
-    max-height: 320px;
-  }
-
   .nav-bar {
     padding: 0.25rem 0 0.55rem;
   }
@@ -637,14 +641,14 @@ textarea:focus {
     width: 100%;
     text-align: center;
   }
-
-  .splash-image {
-    max-height: 260px;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .card {
     animation: none;
+  }
+
+  .parallax-bg {
+    transform: none !important;
   }
 }

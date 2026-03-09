@@ -118,9 +118,53 @@ function Footer() {
   `;
 }
 
+function ParallaxBackground() {
+  const bgRef = React.useRef(null);
+
+  React.useEffect(() => {
+    if (!bgRef.current) {
+      return undefined;
+    }
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return undefined;
+    }
+
+    let rafId = 0;
+    const update = () => {
+      rafId = 0;
+      const speed = window.innerWidth <= 760 ? 0.08 : 0.14;
+      const y = -window.scrollY * speed;
+      bgRef.current.style.transform = `translate3d(0, ${y}px, 0) scale(1.2)`;
+    };
+
+    const onScrollOrResize = () => {
+      if (rafId) {
+        return;
+      }
+      rafId = window.requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScrollOrResize, { passive: true });
+    window.addEventListener("resize", onScrollOrResize);
+
+    return () => {
+      window.removeEventListener("scroll", onScrollOrResize);
+      window.removeEventListener("resize", onScrollOrResize);
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+      }
+    };
+  }, []);
+
+  return html`<div className="parallax-bg" ref=${bgRef} aria-hidden="true"></div>`;
+}
+
 export function SiteLayout({ activePage, hero, children }) {
   return html`
     <${React.Fragment}>
+      <${ParallaxBackground} />
       <${Header} activePage=${activePage} />
       <main>
         <${Hero}

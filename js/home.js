@@ -60,25 +60,6 @@ function HomePage() {
       }}
     >
       <${Section}
-        id="featured"
-        title="Buddy's in Action"
-        lead="Professional results, clear communication, and clean job sites across Albuquerque and Rio Rancho."
-      >
-        <figure className="splash-figure">
-          <img
-            className="splash-image"
-            src="images/splash.jpg"
-            alt="Buddy's Handyman Services completing a residential repair project."
-            loading="lazy"
-            decoding="async"
-          />
-          <figcaption>
-            Quality-first handyman support for repairs, upgrades, and ongoing home maintenance.
-          </figcaption>
-        </figure>
-      <//>
-
-      <${Section}
         id="highlights"
         title="These are the most requested services from Buddy"
         lead="These are the most called and most quoted jobs from last year."
