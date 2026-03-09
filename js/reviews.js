@@ -4,19 +4,19 @@ import { COMPANY, ContactStrip, Section, SiteLayout, TestimonialCard, mount } fr
 const TESTIMONIALS = [
   {
     quote:
-      "Buddy fixed our door, patched drywall, and replaced lighting in one visit. Clear pricing, excellent work, and no mess left behind.",
+      "Buddy patched and textured several wall holes, then painted the room. The finish matched perfectly and looked brand new.",
     author: "Maria T.",
     context: "Homeowner in Northeast Albuquerque",
   },
   {
     quote:
-      "I live out of state and booked help for my aunt in Rio Rancho. Communication was fast and the updates were detailed.",
+      "I booked service for my aunt in Rio Rancho. He replaced a shower valve and fixed the p-trap issue quickly with great communication.",
     author: "James R.",
     context: "Grandson coordinating family home repairs",
   },
   {
     quote:
-      "Professional from start to finish. He arrived on time, explained options, and finished the punch list before our home sale photos.",
+      "We needed tile repair and new baseboards before listing photos. Buddy arrived on time and the quality was excellent.",
     author: "Denise and Carl P.",
     context: "Home sellers in Albuquerque",
   },
@@ -30,7 +30,7 @@ function ReviewsPage() {
         eyebrow: "Customer Feedback",
         title: "Social proof that helps visitors book with confidence.",
         lead:
-          "Competitor research consistently showed testimonials and ratings as major conversion drivers. This page gives you a clean place to feature both.",
+          "Feature reviews from clients who hired Buddy for the six most-requested jobs: wall repair, painting, tile, water heaters, fixture repairs, and trim.",
         primaryCta: { label: "Leave a Review", href: "#google-reviews" },
         secondaryCta: { label: "Request Service", href: "contact.html" },
         note: "Add your Google review widget or screenshot block below.",

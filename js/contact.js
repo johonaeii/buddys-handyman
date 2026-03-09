@@ -6,10 +6,10 @@ function ContactPage() {
     <${SiteLayout}
       activePage="contact"
       hero=${{
-        eyebrow: "Free Estimates",
+        eyebrow: "Free Estimates on Core Services",
         title: "Call now or send a quick request.",
         lead:
-          "Many customers prefer a direct phone call, while others prefer digital booking. This page supports both paths.",
+          "Get a fast quote for tape and texture, painting, tile, water heater work, plumbing fixture repairs, or interior trim and baseboards.",
         primaryCta: { label: `Call ${COMPANY.phoneDisplay}`, href: `tel:${COMPANY.phoneDigits}` },
         secondaryCta: { label: "Jump to Form", href: "#estimate-form" },
         note: "Response target: same business day.",

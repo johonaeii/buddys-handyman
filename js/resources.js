@@ -3,39 +3,39 @@ import { ContactStrip, ResourceCard, Section, SiteLayout, mount } from "./site-s
 
 const RESOURCE_IDEAS = [
   {
-    title: "How to Choose a Trustworthy Handyman for Your Parent",
+    title: "When to Patch and Texture vs Replace Entire Drywall Sections",
     summary:
-      "Checklist for credentials, estimates, communication standards, and in-home professionalism.",
+      "Guide homeowners through cost, appearance, and durability tradeoffs for wall damage repair.",
     href: "#",
   },
   {
-    title: "Senior Home Safety Upgrades That Make a Big Difference",
+    title: "Interior vs Exterior Painting: Budget and Timeline Planning",
     summary:
-      "Grab bars, lighting, no-slip flooring, door hardware, and smart locks for safer daily living.",
+      "Set clear expectations for prep, weather timing, and finish quality in residential paint projects.",
     href: "#",
   },
   {
-    title: "What to Include in a Handyman Punch List Before Selling",
+    title: "How to Spot Early Tile Failure Before It Spreads",
     summary:
-      "Small pre-sale repairs that improve buyer confidence and listing photos.",
+      "Help clients identify grout cracks, moisture issues, and loose tile before bigger repairs are needed.",
     href: "#",
   },
   {
-    title: "Smart-Home Tools That Help Families Support Aging Relatives",
+    title: "Water Heater Maintenance Checklist for Albuquerque Homes",
     summary:
-      "Simple devices and installation priorities that blend safety with convenience.",
+      "Seasonal checklist to improve reliability and know when replacement is the better choice.",
     href: "#",
   },
   {
-    title: "Annual Home Maintenance Calendar for Albuquerque Homes",
+    title: "Common Faucet, Shower Valve, and Disposal Problems Explained",
     summary:
-      "Seasonal maintenance planning for weather shifts, exterior wear, and HVAC efficiency.",
+      "Simple breakdown of repair options, replacement triggers, and ways to avoid recurring plumbing issues.",
     href: "#",
   },
   {
-    title: "How to Prepare for a Contractor Visit",
+    title: "Baseboards and Interior Trim: Small Upgrades with Big Visual Impact",
     summary:
-      "How to document issues, gather photos, and define project priorities in under 10 minutes.",
+      "Show homeowners how trim and baseboard improvements sharpen room appearance and resale appeal.",
     href: "#",
   },
 ];
@@ -46,9 +46,9 @@ function ResourcesPage() {
       activePage="resources"
       hero=${{
         eyebrow: "Helpful Content",
-        title: "Resource ideas that support trust, SEO, and referral sharing.",
+        title: "Resource ideas built around Buddy's top six services.",
         lead:
-          "Use this page as a starter blog hub for maintenance tips and family-focused guidance.",
+          "Use this page as a blog hub that supports SEO and reinforces the services that generate the most calls and revenue.",
         primaryCta: { label: "See Contact Options", href: "contact.html" },
         secondaryCta: { label: "Explore Services", href: "services.html" },
         note: "Post one article per month to keep search visibility active.",
@@ -57,7 +57,7 @@ function ResourcesPage() {
       <${Section}
         id="resource-grid"
         title="Article Starters"
-        lead="These topics were chosen from the audience insights in your competitor research summary."
+        lead="These topics are mapped directly to the six most called and quoted job categories."
       >
         <div className="card-grid three-col">
           ${RESOURCE_IDEAS.map(

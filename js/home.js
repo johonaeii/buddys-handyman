@@ -1,39 +1,106 @@
 import { html } from "./react-lib.js";
 import { COMPANY, ContactStrip, InfoCard, Section, SiteLayout, mount } from "./site-shell.js";
 
+const TOP_REVENUE_SERVICES = [
+  {
+    title: "Tape and Texture Wall Repair",
+    text: "Patch wall damage and blend texture so repaired areas match the original finish.",
+  },
+  {
+    title: "Residential Interior and Exterior Painting",
+    text: "High-quality painting and touch-up work to refresh rooms, trim, and curb appeal.",
+  },
+  {
+    title: "Tile Repair and Installation",
+    text: "Repair cracked tile, replace damaged sections, and complete clean tile installations.",
+  },
+  {
+    title: "Water Heater Service",
+    text: "Maintenance and replacement services for reliable hot water performance.",
+  },
+  {
+    title: "Faucet, Shower, and Drain Repairs",
+    text: "Faucet and shower valve work, p-trap fixes, and garbage disposal replacements.",
+  },
+  {
+    title: "Interior Trim and Baseboards",
+    text: "Install and repair baseboards and trim with clean, professional finishing.",
+  },
+];
+
+const ADDITIONAL_SERVICE_HIGHLIGHTS = [
+  "Drywall installation and repair",
+  "Electrical work",
+  "Fan installation and fan repair",
+  "Flooring installation and flooring repair",
+  "Furniture assembly",
+  "General construction and general repairs",
+  "Gutter cleaning",
+  "Home maintenance and repairs",
+  "Plumbing fixture installation",
+  "TV mounting",
+  "Evaporative cooler service",
+  "Swamp cooler service",
+  "Cabinets and interior structural repairs",
+  "Moving assistance",
+];
+
 function HomePage() {
   return html`
     <${SiteLayout}
       activePage="home"
       hero=${{
-        eyebrow: "Trusted Handyman Support in Albuquerque and Rio Rancho",
-        title: "Reliable home repairs and maintenance for every generation.",
+        eyebrow: "Most Requested Local Services",
+        title: "Focused on doing it right the first time.",
         lead:
-          "Buddy's Handyman Services helps homeowners stay safe, comfortable, and up to date with dependable repairs, upgrades, and respectful in-home service.",
+          "Buddy's Handyman Services in Albuquerque and Rio Rancho is centered on reliability, trust, and highest return on your investment.",
         primaryCta: { label: "Get Your Free Estimate", href: "contact.html" },
         secondaryCta: { label: `Call ${COMPANY.phoneDisplay}`, href: `tel:${COMPANY.phoneDigits}` },
-        note: "Licensed and insured. No job too small.",
+        note: "Licensed and insured. Fast quotes for core repair and finish work.",
       }}
     >
       <${Section}
+        id="featured"
+        title="Buddy's in Action"
+        lead="Professional results, clear communication, and clean job sites across Albuquerque and Rio Rancho."
+      >
+        <figure className="splash-figure">
+          <img
+            className="splash-image"
+            src="images/splash.jpg"
+            alt="Buddy's Handyman Services completing a residential repair project."
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>
+            Quality-first handyman support for repairs, upgrades, and ongoing home maintenance.
+          </figcaption>
+        </figure>
+      <//>
+
+      <${Section}
         id="highlights"
-        title="What Top Competitor Websites Get Right"
-        lead="Your starter site already includes the same high-converting patterns found across leading Albuquerque handyman websites."
+        title="These are the most requested services from Buddy"
+        lead="These are the most called and most quoted jobs from last year."
       >
         <div className="card-grid three-col">
-          <${InfoCard}
-            title="Fast Contact Access"
-            text="Phone and estimate CTAs stay visible in the header and repeat across each page."
-          />
-          <${InfoCard}
-            title="Trust Signals"
-            text="License and insurance messaging are clearly displayed with room for badges and verifiable links."
-          />
-          <${InfoCard}
-            title="Clear Service Menus"
-            text="Visitors can quickly find common tasks like plumbing fixes, painting, carpentry, and installations."
-          />
+          ${TOP_REVENUE_SERVICES.map(
+            (service) => html`<${InfoCard} key=${service.title} title=${service.title} text=${service.text} />`,
+          )}
         </div>
+      <//>
+
+      <${Section}
+        id="additional"
+        title="Also Available Services"
+        lead="Buddy's also provides a wider range of home repair and maintenance support across Albuquerque and Rio Rancho."
+      >
+        <div className="chip-row">
+          ${ADDITIONAL_SERVICE_HIGHLIGHTS.map((service) => html`<span className="chip" key=${service}>${service}</span>`)}
+        </div>
+        <p>
+          See the full service menu on <a className="text-link" href="services.html">the Services page</a>.
+        </p>
       <//>
 
       <${Section}
@@ -44,11 +111,11 @@ function HomePage() {
         <div className="card-grid two-col">
           <${InfoCard}
             title="Senior-Friendly Experience"
-            text="Large text, high contrast, simple navigation, and straightforward language reduce friction for older visitors."
+            text="Don't want to deal with webpages and internet connection? Give us a call"
           />
           <${InfoCard}
             title="Digital Convenience"
-            text="Quick forms, review highlights, and resource pages help younger family members research and book with confidence."
+            text="Online forms and review highlights. Book with confidence."
           />
         </div>
       <//>
@@ -56,7 +123,7 @@ function HomePage() {
       <${Section}
         id="process"
         title="Simple 3-Step Service Process"
-        lead="Use this section to explain exactly what customers can expect from first call to finished work."
+        lead="Here's exactly what you can expect from first call to finished work."
       >
         <ol className="process-list">
           <li>
@@ -77,7 +144,7 @@ function HomePage() {
       <${ContactStrip}
         title="Need help this week?"
         text="Call now for a free estimate and same-week availability options in Albuquerque and Rio Rancho."
-        buttonLabel=${`Call:${COMPANY.phoneDisplay}`}
+        buttonLabel=${`Call ${COMPANY.phoneDisplay}`}
         buttonHref=${`tel:${COMPANY.phoneDigits}`}
       />
     <//>

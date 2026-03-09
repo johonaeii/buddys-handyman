@@ -38,6 +38,12 @@ a {
   text-underline-offset: 3px;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 .container {
   width: min(100% - 2.2rem, var(--max));
   margin-inline: auto;
@@ -110,18 +116,23 @@ a {
   margin: 0;
   padding: 0;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 0.3rem;
   list-style: none;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  padding-bottom: 0.25rem;
 }
 
 .nav-link {
   display: inline-block;
   text-decoration: none;
-  padding: 0.46rem 0.85rem;
+  padding: 0.58rem 0.9rem;
   border-radius: 999px;
   color: var(--ink-700);
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .nav-link:hover,
@@ -210,6 +221,7 @@ h1 {
   font-weight: 700;
   font-size: 0.95rem;
   cursor: pointer;
+  min-height: 44px;
 }
 
 .btn-solid {
@@ -285,6 +297,29 @@ h1 {
 .card p {
   margin: 0.56rem 0 0;
   color: var(--ink-700);
+}
+
+.splash-figure {
+  margin: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid rgba(16, 36, 48, 0.1);
+  box-shadow: var(--card-shadow);
+}
+
+.splash-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 560px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.splash-figure figcaption {
+  padding: 0.9rem 1rem 1rem;
+  color: var(--ink-700);
+  font-weight: 600;
 }
 
 .text-link {
@@ -423,10 +458,11 @@ textarea {
   width: 100%;
   border: 1px solid var(--line);
   border-radius: 0.65rem;
-  padding: 0.62rem 0.72rem;
+  padding: 0.72rem 0.78rem;
   font: inherit;
   color: var(--ink-900);
   background: #fdfefe;
+  min-height: 44px;
 }
 
 input:focus,
@@ -510,14 +546,26 @@ textarea:focus {
     font-size: 17px;
   }
 
+  .container {
+    width: min(100% - 1.2rem, var(--max));
+  }
+
   .header-row {
     flex-direction: column;
     align-items: flex-start;
+    gap: 0.7rem;
+    padding: 0.7rem 0;
   }
 
   .quick-contact {
     width: 100%;
-    justify-content: space-between;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+  }
+
+  .phone-link {
+    font-size: 0.98rem;
   }
 
   .card-grid.three-col,
@@ -534,5 +582,69 @@ textarea:focus {
 
   .hero {
     padding-top: 1.4rem;
+  }
+
+  .hero-panel {
+    padding: 1.15rem;
+  }
+
+  .hero-actions {
+    width: 100%;
+    gap: 0.55rem;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .section {
+    padding: 1.35rem 0;
+  }
+
+  .card {
+    padding: 0.9rem;
+  }
+
+  .splash-image {
+    max-height: 320px;
+  }
+
+  .nav-bar {
+    padding: 0.25rem 0 0.55rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 16px;
+  }
+
+  h1 {
+    font-size: 1.72rem;
+  }
+
+  .brand small {
+    font-size: 0.82rem;
+  }
+
+  .nav-link {
+    padding: 0.52rem 0.72rem;
+    font-size: 0.92rem;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .splash-image {
+    max-height: 260px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    animation: none;
   }
 }

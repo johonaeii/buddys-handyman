@@ -225,12 +225,45 @@ export function EstimateForm() {
         Service Needed
         <select name="service" required>
           <option value="">Choose one</option>
-          <option>General Handyman Repairs</option>
-          <option>Plumbing and Fixture Installs</option>
-          <option>Electrical and Lighting</option>
-          <option>Painting and Drywall</option>
-          <option>Carpentry and Trim Work</option>
-          <option>Smart-Home Installations</option>
+          <optgroup label="Top 6 Most Requested Services">
+            <option>Tape and Texture Wall Repair</option>
+            <option>Interior or Exterior Residential Painting</option>
+            <option>Tile Repair or Installation</option>
+            <option>Water Heater Maintenance or Replacement</option>
+            <option>Faucet, Shower Valve, P-Trap, or Disposal Repair</option>
+            <option>Interior Trim and Baseboard Work</option>
+          </optgroup>
+          <optgroup label="Additional Services">
+            <option>Drywall Installation</option>
+            <option>Drywall Repair</option>
+            <option>Electrical Work</option>
+            <option>Exterior Painting</option>
+            <option>Fan Installation</option>
+            <option>Fan Repair</option>
+            <option>Flooring Repair</option>
+            <option>Furniture Assembly</option>
+            <option>General Construction</option>
+            <option>General Repairs</option>
+            <option>Gutter Cleaning</option>
+            <option>Home Maintenance and Repairs</option>
+            <option>Install Flooring</option>
+            <option>Interior Painting</option>
+            <option>Moving Assistance</option>
+            <option>Paint Indoors</option>
+            <option>Painting</option>
+            <option>Plumbing Fixture Installation</option>
+            <option>Remodeling</option>
+            <option>Repair Flooring</option>
+            <option>Repair Water Fixtures</option>
+            <option>Tile Work Installation</option>
+            <option>Tile Work Replacement</option>
+            <option>TV Mounting</option>
+            <option>Evaporative Cooler Service</option>
+            <option>Swamp Cooler Service</option>
+            <option>Cabinets</option>
+            <option>Flooring</option>
+            <option>Interior Structural Repairs</option>
+          </optgroup>
         </select>
       </label>
 
