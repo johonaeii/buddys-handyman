@@ -48,7 +48,7 @@ function TrustPage() {
       <${Section}
         id="senior-focus"
         title="Senior-Friendly Service Commitments"
-        lead="Older homeowners prioritize safety, professionalism, and straightforward communication."
+        lead="Safety, professionalism, and straightforward communication."
       >
         <ul className="bullet-list large-list">
           <li>Phone-first booking for customers who prefer speaking directly.</li>

@@ -105,8 +105,8 @@ function HomePage() {
 
       <${Section}
         id="audience"
-        title="Built for Older Homeowners and Younger Relatives"
-        lead="Content and layout support users who prefer phone calls and users who prefer mobile forms and digital scheduling."
+        title="Don't know where to start? Give us a call!"
+        lead="Phone calls, mobile forms, and digital scheduling."
       >
         <div className="card-grid two-col">
           <${InfoCard}
