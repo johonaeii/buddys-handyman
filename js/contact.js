@@ -48,7 +48,7 @@ function ContactPage() {
       <${Section}
         id="estimate-form"
         title="Request Your Free Estimate"
-        lead="This starter form is front-end only. Connect it to your email platform, CRM, or scheduling tool next."
+        lead="This starter form is not connnected to an email yet."
       >
         <${EstimateForm} />
       <//>
