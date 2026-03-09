@@ -17,7 +17,7 @@ const NAV_LINKS = [
   { id: "trust", label: "About & Trust", href: "trust.html" },
   { id: "reviews", label: "Reviews", href: "reviews.html" },
   { id: "contact", label: "Contact", href: "contact.html" },
-  { id: "resources", label: "Resources", href: "resources.html" },
+  // { id: "resources", label: "Resources", href: "resources.html" },
 ];
 
 export function mount(component) {

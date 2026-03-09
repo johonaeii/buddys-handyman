@@ -28,12 +28,12 @@ function ReviewsPage() {
       activePage="reviews"
       hero=${{
         eyebrow: "Customer Feedback",
-        title: "Social proof that helps visitors book with confidence.",
+        title: "Leave us a review, we want to hear your feedback!",
         lead:
-          "Feature reviews from clients who hired Buddy for the six most-requested jobs: wall repair, painting, tile, water heaters, fixture repairs, and trim.",
+          "Feature reviews for the six most-requested jobs: wall repair, painting, tile, water heaters, fixture repairs, and trim.",
         primaryCta: { label: "Leave a Review", href: "#google-reviews" },
         secondaryCta: { label: "Request Service", href: "contact.html" },
-        note: "Add your Google review widget or screenshot block below.",
+        note: "Add Google review here.",
       }}
     >
       <${Section}

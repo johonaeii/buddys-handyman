@@ -7,7 +7,7 @@ function TrustPage() {
       activePage="trust"
       hero=${{
         eyebrow: "About Buddy's",
-        title: "Professional standards that build long-term trust.",
+        title: "Don't stress, don't second guess",
         lead:
           "Buddy's Handyman Services is designed around dependable scheduling, quality craftsmanship, and respectful service in every home.",
         primaryCta: { label: "Book a Consultation", href: "contact.html" },
@@ -17,8 +17,8 @@ function TrustPage() {
     >
       <${Section}
         id="trust-signals"
-        title="Trust and Legitimacy Signals"
-        lead="High-performing local competitors lead with proof of reliability. This starter page follows the same structure."
+        title="A handyman you can trust"
+        lead="Verified and certified quality service"
       >
         <div className="card-grid two-col">
           <${InfoCard}
@@ -27,15 +27,15 @@ function TrustPage() {
           />
           <${InfoCard}
             title="Insurance Coverage"
-            text="State that Buddy's carries liability coverage and follows safe work practices on every job."
+            text="Buddy's carries liability coverage and follows safe work practices on every job."
           />
           <${InfoCard}
             title="Local Service Identity"
-            text="Reinforce Albuquerque and Rio Rancho coverage to improve local trust and search relevance."
+            text="Albuquerque and Rio Rancho coverage"
           />
           <${InfoCard}
             title="Consistent Communication"
-            text="Set expectations early: clear scope, timeline updates, and transparent pricing discussions."
+            text="Clear scope, timeline updates, and transparent pricing discussions."
           />
         </div>
 
@@ -51,10 +51,8 @@ function TrustPage() {
         lead="Older homeowners prioritize safety, professionalism, and straightforward communication."
       >
         <ul className="bullet-list large-list">
-          <li>Large, readable website text and clear call-to-action buttons.</li>
           <li>Phone-first booking for customers who prefer speaking directly.</li>
           <li>Respectful in-home conduct, careful cleanup, and on-time arrivals.</li>
-          <li>Optional senior discount messaging and aging-in-place service packages.</li>
         </ul>
       <//>
 
