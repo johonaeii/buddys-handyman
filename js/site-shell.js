@@ -34,7 +34,7 @@ function Header({ activePage }) {
       <div className="container header-row">
         <a className="brand" href="index.html" aria-label="Buddy's Handyman Services home">
           <span className="brand-mark" aria-hidden="true">
-            <img className="brand-logo" src="images/bhs-logo.png" alt="" />
+            <img className="brand-logo" src="images/bhs-favicon.png" alt="" />
           </span>
           <span>
             <strong>${COMPANY.name}</strong>
