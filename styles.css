@@ -154,11 +154,6 @@ img {
   border-radius: 0.72rem;
 }
 
-.brand:hover .brand-mark,
-.brand:focus-visible .brand-mark {
-  animation: rubber-band 0.52s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 .quick-contact {
   display: flex;
   align-items: center;
@@ -204,9 +199,7 @@ img {
 .nav-link:focus-visible {
   background: rgba(244, 200, 77, 0.28);
   border-color: rgba(124, 20, 25, 0.25);
-  transform: translateY(-1px);
   outline: none;
-  animation: rubber-band 0.46s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-link.is-active {
@@ -312,10 +305,15 @@ h1 {
   will-change: transform;
 }
 
-.btn:hover,
+.btn:hover {
+  transform: none;
+  animation: none;
+}
+
 .btn:focus-visible {
-  transform: translateY(-1px);
-  outline: none;
+  transform: none;
+  outline: 2px solid rgba(94, 15, 19, 0.5);
+  outline-offset: 2px;
 }
 
 .btn-solid {
@@ -325,7 +323,6 @@ h1 {
   box-shadow: 0 10px 24px rgba(18, 17, 17, 0.28);
 }
 
-.btn-solid:hover,
 .btn-solid:focus-visible {
   background: linear-gradient(140deg, #ffe08b, #f4c84d);
   box-shadow: 0 12px 26px rgba(18, 17, 17, 0.32);
@@ -337,7 +334,6 @@ h1 {
   background: rgba(255, 255, 255, 0.04);
 }
 
-.btn-ghost:hover,
 .btn-ghost:focus-visible {
   border-color: rgba(255, 244, 216, 0.95);
   background: rgba(255, 255, 255, 0.1);
@@ -396,7 +392,6 @@ h1 {
   transform: translateY(-3px);
   border-color: rgba(124, 20, 25, 0.24);
   box-shadow: 0 16px 30px rgba(26, 11, 11, 0.16);
-  animation: rubber-band 0.42s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card-grid .card:nth-child(2) {
@@ -490,7 +485,6 @@ h1 {
 .chip:focus-visible {
   transform: translateY(-1px);
   border-color: rgba(124, 20, 25, 0.34);
-  animation: rubber-band 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .section-accent {
@@ -677,27 +671,6 @@ textarea:focus {
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes rubber-band {
-  0% {
-    transform: scale3d(1, 1, 1);
-  }
-  30% {
-    transform: scale3d(1.09, 0.9, 1);
-  }
-  45% {
-    transform: scale3d(0.92, 1.08, 1);
-  }
-  60% {
-    transform: scale3d(1.04, 0.96, 1);
-  }
-  75% {
-    transform: scale3d(0.98, 1.02, 1);
-  }
-  100% {
-    transform: scale3d(1, 1, 1);
   }
 }
 
