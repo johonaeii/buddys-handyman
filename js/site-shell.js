@@ -33,7 +33,9 @@ function Header({ activePage }) {
     <header className="top-header" aria-label="Main navigation">
       <div className="container header-row">
         <a className="brand" href="index.html" aria-label="Buddy's Handyman Services home">
-          <span className="brand-mark" aria-hidden="true">BH</span>
+          <span className="brand-mark" aria-hidden="true">
+            <img className="brand-logo" src="images/bhs-logo.png" alt="" />
+          </span>
           <span>
             <strong>${COMPANY.name}</strong>
             <small>${COMPANY.cityLine}</small>
@@ -161,23 +163,133 @@ function ParallaxBackground() {
   return html`<div className="parallax-bg" ref=${bgRef} aria-hidden="true"></div>`;
 }
 
+function ScrollRubberBand({ children }) {
+  const shellRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const shell = shellRef.current;
+    if (!shell) {
+      return undefined;
+    }
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return undefined;
+    }
+
+    let rafId = 0;
+    let offset = 0;
+    let velocity = 0;
+    let touchY = null;
+    const maxOffset = 24;
+
+    const atTop = () => window.scrollY <= 0;
+    const atBottom = () => window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 1;
+
+    const animate = () => {
+      velocity += (0 - offset) * 0.14;
+      velocity *= 0.78;
+      offset += velocity;
+
+      const clamped = Math.max(-maxOffset, Math.min(maxOffset, offset));
+      shell.style.transform = `translate3d(0, ${clamped.toFixed(2)}px, 0)`;
+
+      if (Math.abs(offset) < 0.12 && Math.abs(velocity) < 0.12) {
+        offset = 0;
+        velocity = 0;
+        shell.style.transform = "";
+        rafId = 0;
+        return;
+      }
+
+      rafId = window.requestAnimationFrame(animate);
+    };
+
+    const nudge = (impulse) => {
+      velocity += impulse;
+      if (!rafId) {
+        rafId = window.requestAnimationFrame(animate);
+      }
+    };
+
+    const onWheel = (event) => {
+      const pullingPastTop = event.deltaY < 0 && atTop();
+      const pushingPastBottom = event.deltaY > 0 && atBottom();
+      if (!pullingPastTop && !pushingPastBottom) {
+        return;
+      }
+
+      const impulse = Math.max(-7, Math.min(7, -event.deltaY * 0.05));
+      nudge(impulse);
+    };
+
+    const onTouchStart = (event) => {
+      touchY = event.touches[0]?.clientY ?? null;
+    };
+
+    const onTouchMove = (event) => {
+      const currentY = event.touches[0]?.clientY;
+      if (typeof currentY !== "number" || touchY === null) {
+        return;
+      }
+
+      const delta = currentY - touchY;
+      touchY = currentY;
+
+      const pullingPastTop = delta > 0 && atTop();
+      const pushingPastBottom = delta < 0 && atBottom();
+      if (!pullingPastTop && !pushingPastBottom) {
+        return;
+      }
+
+      const impulse = Math.max(-7, Math.min(7, delta * 0.18));
+      nudge(impulse);
+    };
+
+    const onTouchEnd = () => {
+      touchY = null;
+    };
+
+    window.addEventListener("wheel", onWheel, { passive: true });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchend", onTouchEnd, { passive: true });
+    window.addEventListener("touchcancel", onTouchEnd, { passive: true });
+
+    return () => {
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
+      window.removeEventListener("touchcancel", onTouchEnd);
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+      }
+      shell.style.transform = "";
+    };
+  }, []);
+
+  return html`<div className="site-shell" ref=${shellRef}>${children}</div>`;
+}
+
 export function SiteLayout({ activePage, hero, children }) {
   return html`
     <${React.Fragment}>
       <${ParallaxBackground} />
-      <${Header} activePage=${activePage} />
-      <main>
-        <${Hero}
-          eyebrow=${hero.eyebrow}
-          title=${hero.title}
-          lead=${hero.lead}
-          primaryCta=${hero.primaryCta}
-          secondaryCta=${hero.secondaryCta}
-          note=${hero.note}
-        />
-        ${children}
-      </main>
-      <${Footer} />
+      <${ScrollRubberBand}>
+        <${Header} activePage=${activePage} />
+        <main>
+          <${Hero}
+            eyebrow=${hero.eyebrow}
+            title=${hero.title}
+            lead=${hero.lead}
+            primaryCta=${hero.primaryCta}
+            secondaryCta=${hero.secondaryCta}
+            note=${hero.note}
+          />
+          ${children}
+        </main>
+        <${Footer} />
+      <//>
     <//>
   `;
 }
