@@ -215,20 +215,28 @@ img {
 .hero-panel {
   position: relative;
   overflow: hidden;
+  isolation: isolate;
   border-radius: var(--radius-lg);
   border: 1px solid rgba(244, 200, 77, 0.35);
   background:
     linear-gradient(132deg, rgba(94, 15, 19, 0.98), rgba(124, 20, 25, 0.98) 52%, rgba(37, 16, 16, 0.98));
   color: var(--white);
   padding: clamp(1.35rem, 3vw, 2.7rem);
+  padding-right: clamp(8.5rem, 34vw, 23rem);
   box-shadow: var(--shadow-lg);
   animation: panel-in 0.7s ease both;
+}
+
+.hero-panel > * {
+  position: relative;
+  z-index: 2;
 }
 
 .hero-panel::before {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 0;
   pointer-events: none;
   background:
     linear-gradient(90deg, rgba(244, 200, 77, 0), rgba(244, 200, 77, 0.1) 24%, rgba(244, 200, 77, 0) 60%) center/100% 100%,
@@ -239,12 +247,17 @@ img {
 .hero-panel::after {
   content: "";
   position: absolute;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  right: -95px;
-  top: -110px;
-  background: radial-gradient(circle, rgba(244, 200, 77, 0.42), rgba(244, 200, 77, 0));
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 74% 50%, rgba(244, 200, 77, 0.26), rgba(244, 200, 77, 0) 58%),
+    linear-gradient(132deg, rgba(94, 15, 19, 0.34), rgba(124, 20, 25, 0.24) 52%, rgba(37, 16, 16, 0.2)),
+    url("images/bhs-logo.png");
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: right 4.5% center, center center, right 4.5% center;
+  background-size: 58% 88%, 100% 100%, 42% auto;
+  opacity: 0.52;
 }
 
 .eyebrow {
@@ -688,10 +701,9 @@ textarea:focus {
   }
 
   .hero-panel::after {
-    width: 230px;
-    height: 230px;
-    right: -70px;
-    top: -90px;
+    background-size: 66% 90%, 100% 100%, 50% auto;
+    background-position: right 3% center, center center, right 3% center;
+    opacity: 0.46;
   }
 }
 
@@ -752,6 +764,12 @@ textarea:focus {
     opacity: 0.7;
   }
 
+  .hero-panel::after {
+    background-size: 90% 90%, 100% 100%, 74% auto;
+    background-position: center center, center center, center center;
+    opacity: 0.28;
+  }
+
   .hero-actions {
     width: 100%;
     gap: 0.55rem;
@@ -809,6 +827,11 @@ textarea:focus {
   .btn {
     width: 100%;
     text-align: center;
+  }
+
+  .hero-panel::after {
+    background-size: 96% 92%, 100% 100%, 88% auto;
+    opacity: 0.22;
   }
 }
 
