@@ -144,7 +144,6 @@ function Hero({ eyebrow, title, lead, primaryCta, secondaryCta, note }) {
             <p className="hero-aside-label">Simple, local, dependable</p>
 
             <div className="hero-aside-card">
-              <img className="hero-badge-mark" src="images/bhs-logo.png" alt="" aria-hidden="true" />
               <ul className="hero-points">
                 ${trustPoints.map((point) => html`<li key=${point}>${point}</li>`)}
               </ul>
