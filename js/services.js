@@ -125,7 +125,7 @@ function ServicesPage() {
           "These are the most called and most quoted jobs from last year, and the work Buddy's completes every week across Albuquerque and Rio Rancho.",
         primaryCta: { label: "Request a Free Estimate", href: "contact.html" },
         secondaryCta: { label: `Call ${COMPANY.phoneDisplay}`, href: `tel:${COMPANY.phoneDigits}` },
-        note: "Top trusted in all Bernalillo County",
+        note: "Trusted across Bernalillo County.",
       }}
     >
       <${Section}

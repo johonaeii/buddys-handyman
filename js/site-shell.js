@@ -29,64 +29,135 @@ export function mount(component) {
 }
 
 function Header({ activePage }) {
-  return html`
-    <header className="top-header" aria-label="Main navigation">
-      <div className="container header-row">
-        <a className="brand" href="index.html" aria-label="Buddy's Handyman Services home">
-          <span className="brand-mark" aria-hidden="true">
-            <img className="brand-logo" src="images/bhs-favicon.png" alt="" />
-          </span>
-          <span>
-            <strong>${COMPANY.name}</strong>
-            <small>${COMPANY.cityLine}</small>
-          </span>
-        </a>
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-        <div className="quick-contact">
-          <a className="phone-link" href=${`tel:${COMPANY.phoneDigits}`}>Call ${COMPANY.phoneDisplay}</a>
-          <a className="btn btn-solid" href="contact.html">Free Estimate</a>
+  React.useEffect(() => {
+    const closeOnWideScreens = () => {
+      if (window.innerWidth > 860) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", closeOnWideScreens);
+
+    return () => {
+      window.removeEventListener("resize", closeOnWideScreens);
+    };
+  }, []);
+
+  React.useEffect(() => {
+    setIsMenuOpen(false);
+  }, [activePage]);
+
+  const closeMenu = () => setIsMenuOpen(false);
+
+  return html`
+    <header className=${isMenuOpen ? "top-header menu-open" : "top-header"} aria-label="Main navigation">
+      <div className="container">
+        <div className="header-shell">
+          <div className="header-bar">
+            <a className="brand" href="index.html" aria-label="Buddy's Handyman Services home" onClick=${closeMenu}>
+              <span className="brand-mark" aria-hidden="true">
+                <img className="brand-logo" src="images/bhs-favicon.png" alt="" />
+              </span>
+              <span className="brand-copy">
+                <strong>${COMPANY.name}</strong>
+                <small>${COMPANY.cityLine}</small>
+              </span>
+            </a>
+
+            <button
+              className="nav-toggle"
+              type="button"
+              aria-expanded=${isMenuOpen}
+              aria-controls="primary-nav"
+              onClick=${() => setIsMenuOpen((open) => !open)}
+            >
+              <span className="nav-toggle-label">Menu</span>
+              <span className="nav-toggle-lines" aria-hidden="true">
+                <span></span>
+                <span></span>
+              </span>
+            </button>
+          </div>
+
+          <div id="primary-nav" className=${isMenuOpen ? "header-panel is-open" : "header-panel"}>
+            <nav className="nav-bar" aria-label="Primary">
+              <ul className="nav-list">
+                ${NAV_LINKS.map(
+                  (link) => html`
+                    <li key=${link.id}>
+                      <a
+                        className=${link.id === activePage ? "nav-link is-active" : "nav-link"}
+                        href=${link.href}
+                        aria-current=${link.id === activePage ? "page" : undefined}
+                        onClick=${closeMenu}
+                      >
+                        ${link.label}
+                      </a>
+                    </li>
+                  `,
+                )}
+              </ul>
+            </nav>
+
+            <div className="quick-contact">
+              <a className="phone-link" href=${`tel:${COMPANY.phoneDigits}`} onClick=${closeMenu}>
+                Call ${COMPANY.phoneDisplay}
+              </a>
+              <a className="btn btn-solid header-cta" href="contact.html" onClick=${closeMenu}>
+                Free Estimate
+              </a>
+            </div>
+          </div>
         </div>
       </div>
-
-      <nav className="container nav-bar" aria-label="Primary">
-        <ul className="nav-list">
-          ${NAV_LINKS.map(
-            (link) => html`
-              <li key=${link.id}>
-                <a
-                  className=${link.id === activePage ? "nav-link is-active" : "nav-link"}
-                  href=${link.href}
-                  aria-current=${link.id === activePage ? "page" : undefined}
-                >
-                  ${link.label}
-                </a>
-              </li>
-            `,
-          )}
-        </ul>
-      </nav>
     </header>
   `;
 }
 
 function Hero({ eyebrow, title, lead, primaryCta, secondaryCta, note }) {
+  const trustPoints = ["Free estimates", "Licensed and insured", COMPANY.cityLine];
+
   return html`
     <section className="hero">
-      <div className="container hero-panel">
-        <p className="eyebrow">${eyebrow}</p>
-        <h1>${title}</h1>
-        <p className="hero-lead">${lead}</p>
+      <div className="container">
+        <div className="hero-shell">
+          <div className="hero-copy">
+            <p className="eyebrow">${eyebrow}</p>
+            <h1>${title}</h1>
+            <p className="hero-lead">${lead}</p>
 
-        <div className="hero-actions">
-          ${primaryCta
-            ? html`<a className="btn btn-solid" href=${primaryCta.href}>${primaryCta.label}</a>`
-            : null}
-          ${secondaryCta
-            ? html`<a className="btn btn-ghost" href=${secondaryCta.href}>${secondaryCta.label}</a>`
-            : null}
+            <div className="hero-actions">
+              ${primaryCta
+                ? html`<a className="btn btn-solid" href=${primaryCta.href}>${primaryCta.label}</a>`
+                : null}
+              ${secondaryCta
+                ? html`<a className="btn btn-ghost" href=${secondaryCta.href}>${secondaryCta.label}</a>`
+                : null}
+            </div>
+
+            ${note ? html`<p className="hero-note">${note}</p>` : null}
+          </div>
+
+          <aside className="hero-aside" aria-label="Business highlights">
+            <p className="hero-aside-label">Simple, local, dependable</p>
+
+            <div className="hero-aside-card">
+              <img className="hero-badge-mark" src="images/bhs-logo.png" alt="" aria-hidden="true" />
+              <ul className="hero-points">
+                ${trustPoints.map((point) => html`<li key=${point}>${point}</li>`)}
+              </ul>
+            </div>
+
+            <div className="hero-contact-card">
+              <span className="hero-contact-label">Prefer to talk first?</span>
+              <a className="hero-inline-link" href=${`tel:${COMPANY.phoneDigits}`}>
+                ${COMPANY.phoneDisplay}
+              </a>
+            </div>
+          </aside>
         </div>
-
-        ${note ? html`<p className="hero-note">${note}</p>` : null}
       </div>
     </section>
   `;
@@ -120,176 +191,22 @@ function Footer() {
   `;
 }
 
-function ParallaxBackground() {
-  const bgRef = React.useRef(null);
-
-  React.useEffect(() => {
-    if (!bgRef.current) {
-      return undefined;
-    }
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return undefined;
-    }
-
-    let rafId = 0;
-    const update = () => {
-      rafId = 0;
-      const speed = window.innerWidth <= 760 ? 0.08 : 0.14;
-      const y = -window.scrollY * speed;
-      bgRef.current.style.transform = `translate3d(0, ${y}px, 0) scale(1.2)`;
-    };
-
-    const onScrollOrResize = () => {
-      if (rafId) {
-        return;
-      }
-      rafId = window.requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener("scroll", onScrollOrResize, { passive: true });
-    window.addEventListener("resize", onScrollOrResize);
-
-    return () => {
-      window.removeEventListener("scroll", onScrollOrResize);
-      window.removeEventListener("resize", onScrollOrResize);
-      if (rafId) {
-        window.cancelAnimationFrame(rafId);
-      }
-    };
-  }, []);
-
-  return html`<div className="parallax-bg" ref=${bgRef} aria-hidden="true"></div>`;
-}
-
-function ScrollRubberBand({ children }) {
-  const shellRef = React.useRef(null);
-
-  React.useEffect(() => {
-    const shell = shellRef.current;
-    if (!shell) {
-      return undefined;
-    }
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return undefined;
-    }
-
-    let rafId = 0;
-    let offset = 0;
-    let velocity = 0;
-    let touchY = null;
-    const maxOffset = 24;
-
-    const atTop = () => window.scrollY <= 0;
-    const atBottom = () => window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 1;
-
-    const animate = () => {
-      velocity += (0 - offset) * 0.14;
-      velocity *= 0.78;
-      offset += velocity;
-
-      const clamped = Math.max(-maxOffset, Math.min(maxOffset, offset));
-      shell.style.transform = `translate3d(0, ${clamped.toFixed(2)}px, 0)`;
-
-      if (Math.abs(offset) < 0.12 && Math.abs(velocity) < 0.12) {
-        offset = 0;
-        velocity = 0;
-        shell.style.transform = "";
-        rafId = 0;
-        return;
-      }
-
-      rafId = window.requestAnimationFrame(animate);
-    };
-
-    const nudge = (impulse) => {
-      velocity += impulse;
-      if (!rafId) {
-        rafId = window.requestAnimationFrame(animate);
-      }
-    };
-
-    const onWheel = (event) => {
-      const pullingPastTop = event.deltaY < 0 && atTop();
-      const pushingPastBottom = event.deltaY > 0 && atBottom();
-      if (!pullingPastTop && !pushingPastBottom) {
-        return;
-      }
-
-      const impulse = Math.max(-7, Math.min(7, -event.deltaY * 0.05));
-      nudge(impulse);
-    };
-
-    const onTouchStart = (event) => {
-      touchY = event.touches[0]?.clientY ?? null;
-    };
-
-    const onTouchMove = (event) => {
-      const currentY = event.touches[0]?.clientY;
-      if (typeof currentY !== "number" || touchY === null) {
-        return;
-      }
-
-      const delta = currentY - touchY;
-      touchY = currentY;
-
-      const pullingPastTop = delta > 0 && atTop();
-      const pushingPastBottom = delta < 0 && atBottom();
-      if (!pullingPastTop && !pushingPastBottom) {
-        return;
-      }
-
-      const impulse = Math.max(-7, Math.min(7, delta * 0.18));
-      nudge(impulse);
-    };
-
-    const onTouchEnd = () => {
-      touchY = null;
-    };
-
-    window.addEventListener("wheel", onWheel, { passive: true });
-    window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchmove", onTouchMove, { passive: true });
-    window.addEventListener("touchend", onTouchEnd, { passive: true });
-    window.addEventListener("touchcancel", onTouchEnd, { passive: true });
-
-    return () => {
-      window.removeEventListener("wheel", onWheel);
-      window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchmove", onTouchMove);
-      window.removeEventListener("touchend", onTouchEnd);
-      window.removeEventListener("touchcancel", onTouchEnd);
-      if (rafId) {
-        window.cancelAnimationFrame(rafId);
-      }
-      shell.style.transform = "";
-    };
-  }, []);
-
-  return html`<div className="site-shell" ref=${shellRef}>${children}</div>`;
-}
-
 export function SiteLayout({ activePage, hero, children }) {
   return html`
     <${React.Fragment}>
-      <${ParallaxBackground} />
-      <${ScrollRubberBand}>
-        <${Header} activePage=${activePage} />
-        <main>
-          <${Hero}
-            eyebrow=${hero.eyebrow}
-            title=${hero.title}
-            lead=${hero.lead}
-            primaryCta=${hero.primaryCta}
-            secondaryCta=${hero.secondaryCta}
-            note=${hero.note}
-          />
-          ${children}
-        </main>
-        <${Footer} />
-      <//>
+      <${Header} activePage=${activePage} />
+      <main className="site-shell">
+        <${Hero}
+          eyebrow=${hero.eyebrow}
+          title=${hero.title}
+          lead=${hero.lead}
+          primaryCta=${hero.primaryCta}
+          secondaryCta=${hero.secondaryCta}
+          note=${hero.note}
+        />
+        ${children}
+      </main>
+      <${Footer} />
     <//>
   `;
 }
@@ -356,7 +273,7 @@ export function EstimateForm() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    setStatus("Thanks. Your request was captured in this demo UI. Connect this form to your email or CRM next.");
+    setStatus("Thanks. This demo form captured your request locally. The next step is wiring it to email or a CRM.");
     event.target.reset();
   }
 

@@ -33,7 +33,7 @@ function ReviewsPage() {
           "Feature reviews for the six most-requested jobs: wall repair, painting, tile, water heaters, fixture repairs, and trim.",
         primaryCta: { label: "Leave a Review", href: "#google-reviews" },
         secondaryCta: { label: "Request Service", href: "contact.html" },
-        note: "Add Google review here.",
+        note: "Connect your live Google review profile here.",
       }}
     >
       <${Section}
