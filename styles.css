@@ -2,11 +2,11 @@
 
 :root {
   color-scheme: dark;
-  --primary: #ff3100;
-  --primary-rgb: 255, 49, 0;
+  --primary: #ffff9d;
+  --primary-rgb: 255, 255, 157;
   --secondary: #000000;
-  --tertiary: #fff3b0;
-  --tertiary-rgb: 255, 243, 176;
+  --tertiary: #ffffff;
+  --tertiary-rgb: 255, 255, 255;
   --brand-500: var(--primary);
   --brand-400: var(--tertiary);
   --brand-300: var(--tertiary);
@@ -19,7 +19,7 @@
   --surface-strong: #050505;
   --surface-soft: #0b0b0b;
   --surface-muted: #121212;
-  --ink: #fff8d6;
+  --ink: #ffffff;
   --ink-soft: rgba(var(--tertiary-rgb), 0.82);
   --ink-faint: rgba(var(--tertiary-rgb), 0.62);
   --line: rgba(var(--tertiary-rgb), 0.12);
@@ -526,7 +526,7 @@ h3 {
 
 .btn-solid:hover,
 .btn-solid:focus-visible {
-  background: #ff4a1a;
+  background: #fffebc;
 }
 
 .btn-ghost {
