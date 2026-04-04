@@ -27,19 +27,19 @@ function ReviewsPage() {
     <${SiteLayout}
       activePage="reviews"
       hero=${{
-        eyebrow: "Customer Feedback",
-        title: "Leave us a review, we want to hear your feedback!",
+        eyebrow: "Customer Reviews",
+        title: "See what local customers say.",
         lead:
-          "Feature reviews for the six most-requested jobs: wall repair, painting, tile, water heaters, fixture repairs, and trim.",
-        primaryCta: { label: "Leave a Review", href: "#google-reviews" },
+          "These examples show the kind of feedback homeowners and family members share after repair, painting, tile, trim, and plumbing jobs.",
+        primaryCta: { label: "See Review Details", href: "#google-reviews" },
         secondaryCta: { label: "Request Service", href: "contact.html" },
-        note: "Connect your live Google review profile here.",
+        note: "A live Google review profile can be linked here for extra peace of mind.",
       }}
     >
       <${Section}
         id="testimonial-grid"
         title="Featured Testimonials"
-        lead="Use real customer quotes that reinforce punctuality, affordability, and work quality."
+        lead="Short examples of the kind of comments customers and family members often share."
       >
         <div className="card-grid three-col">
           ${TESTIMONIALS.map(
@@ -57,22 +57,22 @@ function ReviewsPage() {
 
       <${Section}
         id="google-reviews"
-        title="Ratings Section Starter"
-        lead="Embed Google reviews here, or link to your profile so younger relatives can verify reputation quickly."
+        title="Google Reviews"
+        lead="This section can link directly to a live review profile so customers and family members can verify your reputation easily."
       >
         <div className="rating-panel">
           <p className="rating-score">4.9 / 5.0</p>
-          <p>Average satisfaction target based on completed local jobs.</p>
+          <p>Example rating display for completed local jobs.</p>
           <a className="btn btn-ghost" href="https://www.google.com" target="_blank" rel="noreferrer">
-            Connect Real Google Reviews
+            Open Google Reviews
           </a>
         </div>
       <//>
 
       <${ContactStrip}
-        title="Ready to become the next 5-star review?"
+        title="Ready to talk about your repair?"
         text=${`Call ${COMPANY.phoneDisplay} or request a free estimate online.`}
-        buttonLabel="Get Estimate"
+        buttonLabel="Request An Estimate"
         buttonHref="contact.html"
       />
     <//>

@@ -6,41 +6,41 @@ function ContactPage() {
     <${SiteLayout}
       activePage="contact"
       hero=${{
-        eyebrow: "Free Estimates on Core Services",
-        title: "Call now or send a quick request.",
+        eyebrow: "Free Estimates",
+        title: "Call now or send a simple request.",
         lead:
-          "Get a fast quote for tape and texture, painting, tile, water heater work, plumbing fixture repairs, or interior trim and baseboards.",
+          "If you would rather speak to a person, call. If a family member is helping with the repair, they can also use the form below.",
         primaryCta: { label: `Call ${COMPANY.phoneDisplay}`, href: `tel:${COMPANY.phoneDigits}` },
         secondaryCta: { label: "Jump to Form", href: "#estimate-form" },
-        note: "Response target: same business day.",
+        note: "We aim to respond the same business day.",
       }}
     >
       <${Section}
         id="contact-options"
         title="Contact Options"
-        lead="Choose the method that works best for you or your family."
+        lead="Choose the easiest way to reach Buddy."
       >
         <div className="card-grid three-col">
           <article className="card">
             <h3>Phone</h3>
             <p>
-              Best for urgent repairs or older homeowners who prefer direct communication.
+              Best if you want to explain the job out loud and ask questions right away.
             </p>
             <a className="text-link" href=${`tel:${COMPANY.phoneDigits}`}>${COMPANY.phoneDisplay}</a>
           </article>
           <article className="card">
             <h3>Email</h3>
             <p>
-              Ideal for project details, attachments, and out-of-state family coordination.
+              Helpful when you want to send photos or coordinate for a parent, relative, or rental property.
             </p>
             <a className="text-link" href=${`mailto:${COMPANY.email}`}>${COMPANY.email}</a>
           </article>
           <article className="card">
             <h3>Service Area</h3>
             <p>
-              Albuquerque and Rio Rancho, with scheduling based on project scope and urgency.
+              Serving Albuquerque and Rio Rancho, with scheduling based on the job and how urgent it is.
             </p>
-            <p className="text-link">Local and reliable coverage</p>
+            <p className="support-note">Local, dependable service</p>
           </article>
         </div>
       <//>
@@ -48,7 +48,7 @@ function ContactPage() {
       <${Section}
         id="estimate-form"
         title="Request Your Free Estimate"
-        lead="This starter form is not connected to email yet."
+        lead="If forms are easier for you, this is the information Buddy needs to get started. This demo version is not connected to email yet."
       >
         <${EstimateForm} />
       <//>

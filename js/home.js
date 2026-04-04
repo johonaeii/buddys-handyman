@@ -50,19 +50,19 @@ function HomePage() {
     <${SiteLayout}
       activePage="home"
       hero=${{
-        eyebrow: "Most Requested Local Services",
-        title: "Focused on doing it right the first time.",
+        eyebrow: "Home Repair You Can Trust",
+        title: "Clear, careful help for repairs around the house.",
         lead:
-          "Buddy's Handyman Services in Albuquerque and Rio Rancho is centered on reliability, trust, and highest return on your investment.",
-        primaryCta: { label: "Get Your Free Estimate", href: "contact.html" },
+          "Buddy helps homeowners in Albuquerque and Rio Rancho with repairs, painting, tile, trim, and everyday home projects. You can call first, ask questions, and get a clear estimate before work begins.",
+        primaryCta: { label: "Request a Free Estimate", href: "contact.html" },
         secondaryCta: { label: `Call ${COMPANY.phoneDisplay}`, href: `tel:${COMPANY.phoneDigits}` },
-        note: "Licensed and insured. Fast quotes for core repair and finish work.",
+        note: "Licensed, insured, respectful in your home, and easy to reach by phone.",
       }}
     >
       <${Section}
         id="highlights"
-        title="These are the most requested services from Buddy"
-        lead="These are the most called and most quoted jobs from last year."
+        title="Common jobs Buddy handles"
+        lead="These are some of the repair and finish jobs homeowners ask for most often."
       >
         <div className="card-grid three-col">
           ${TOP_REVENUE_SERVICES.map(
@@ -73,58 +73,58 @@ function HomePage() {
 
       <${Section}
         id="additional"
-        title="Also Available Services"
-        lead="Buddy's also provides a wider range of home repair and maintenance support across Albuquerque and Rio Rancho."
+        title="Other help is available too"
+        lead="If your project is not listed here, call and ask. If it fits Buddy's work, you will get a clear answer."
       >
         <div className="chip-row">
           ${ADDITIONAL_SERVICE_HIGHLIGHTS.map((service) => html`<span className="chip" key=${service}>${service}</span>`)}
         </div>
         <p>
-          See the full service menu on <a className="text-link" href="services.html">the Services page</a>.
+          See the full service list on <a className="text-link" href="services.html">the Services page</a>.
         </p>
       <//>
 
       <${Section}
         id="audience"
-        title="Don't know where to start? Give us a call!"
-        lead="Phone calls, mobile forms, and digital scheduling."
+        title="Prefer to talk by phone?"
+        lead="That is completely okay. You do not need to figure everything out online first."
       >
         <div className="card-grid two-col">
           <${InfoCard}
-            title="Senior-Friendly Experience"
-            text="Don't want to deal with webpages and internet connection? Give us a call"
+            title="Easy To Reach"
+            text="If forms feel frustrating, just call. You can explain the job in your own words and ask questions."
           />
           <${InfoCard}
-            title="Digital Convenience"
-            text="Online forms and review highlights. Book with confidence."
+            title="Helpful For Family Members"
+            text="Adult children, caregivers, or neighbors can also use the form and reviews when helping with a repair."
           />
         </div>
       <//>
 
       <${Section}
         id="process"
-        title="Simple 3-Step Service Process"
-        lead="Here's exactly what you can expect from first call to finished work."
+        title="What working with Buddy looks like"
+        lead="Simple steps, clear communication, and no pressure."
       >
         <ol className="process-list">
           <li>
-            <h3>1. Share Your Project</h3>
-            <p>Call or submit the estimate form with photos, priority level, and ideal timeline.</p>
+            <h3>1. Tell Buddy What You Need</h3>
+            <p>Call or send a short request and describe the repair in plain language.</p>
           </li>
           <li>
-            <h3>2. Receive a Clear Plan</h3>
-            <p>Get scope, pricing expectations, and next available appointment window.</p>
+            <h3>2. Get A Clear Estimate</h3>
+            <p>You will hear what the job involves, what it may cost, and when it can be scheduled.</p>
           </li>
           <li>
-            <h3>3. Get It Done Right</h3>
-            <p>Buddy arrives on time, completes the work professionally, and leaves the area clean.</p>
+            <h3>3. Have The Work Done Carefully</h3>
+            <p>Buddy shows up on time, does the work carefully, and leaves the area clean.</p>
           </li>
         </ol>
       <//>
 
       <${ContactStrip}
-        title="Need help this week?"
-        text="Call now for a free estimate and same-week availability options in Albuquerque and Rio Rancho."
+        title="Need help soon?"
+        text="Call now to talk through the job and ask about the next available opening."
         buttonLabel=${`Call ${COMPANY.phoneDisplay}`}
         buttonHref=${`tel:${COMPANY.phoneDigits}`}
       />

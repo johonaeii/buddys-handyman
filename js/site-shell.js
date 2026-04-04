@@ -6,7 +6,7 @@ export const COMPANY = {
   phoneDisplay: "(505) 555-0199",
   phoneDigits: "+15055550199",
   email: "hello@buddyshandyman.com",
-  cityLine: "Serving Albuquerque and Rio Rancho, New Mexico",
+  cityLine: "Serving Albuquerque and Rio Rancho",
   licenseLabel: "NM Contractor License #000000",
   licenseUrl: "https://www.rld.nm.gov/construction-industries/",
 };
@@ -14,7 +14,7 @@ export const COMPANY = {
 const NAV_LINKS = [
   { id: "home", label: "Home", href: "index.html" },
   { id: "services", label: "Services", href: "services.html" },
-  { id: "trust", label: "About & Trust", href: "trust.html" },
+  { id: "trust", label: "About", href: "trust.html" },
   { id: "reviews", label: "Reviews", href: "reviews.html" },
   { id: "contact", label: "Contact", href: "contact.html" },
   // { id: "resources", label: "Resources", href: "resources.html" },
@@ -25,7 +25,7 @@ const DARK_THEME = "dark";
 const LIGHT_THEME = "light";
 
 function normalizeTheme(theme) {
-  return theme === LIGHT_THEME ? LIGHT_THEME : DARK_THEME;
+  return theme === DARK_THEME ? DARK_THEME : LIGHT_THEME;
 }
 
 function getInitialTheme() {
@@ -40,11 +40,11 @@ function getInitialTheme() {
     try {
       return normalizeTheme(window.localStorage.getItem(THEME_STORAGE_KEY));
     } catch (error) {
-      return DARK_THEME;
+      return LIGHT_THEME;
     }
   }
 
-  return DARK_THEME;
+  return LIGHT_THEME;
 }
 
 function applyTheme(theme) {
@@ -53,7 +53,7 @@ function applyTheme(theme) {
 
   const themeColorMeta = document.querySelector('meta[name="theme-color"]');
   if (themeColorMeta) {
-    themeColorMeta.setAttribute("content", nextTheme === LIGHT_THEME ? "#f3f3f3" : "#000000");
+    themeColorMeta.setAttribute("content", nextTheme === LIGHT_THEME ? "#faf8f3" : "#000000");
   }
 
   try {
@@ -174,10 +174,10 @@ function Header({ activePage }) {
                   className=${isDarkMode ? "btn btn-ghost theme-toggle is-active" : "btn btn-ghost theme-toggle"}
                   type="button"
                   aria-pressed=${isDarkMode}
-                  aria-label=${isDarkMode ? "Dark mode is on. Activate to switch to light mode." : "Dark mode is off. Activate to switch to dark mode."}
+                  aria-label=${isDarkMode ? "Dark theme is on. Activate to switch to light theme." : "Dark theme is off. Activate to switch to dark theme."}
                   onClick=${toggleTheme}
                 >
-                  <span className="theme-toggle-label">Dark Mode</span>
+                  <span className="theme-toggle-label">Dark Theme</span>
                   <span className="theme-toggle-state">${isDarkMode ? "On" : "Off"}</span>
                 </button>
               </div>
@@ -190,7 +190,7 @@ function Header({ activePage }) {
 }
 
 function Hero({ eyebrow, title, lead, primaryCta, secondaryCta, note }) {
-  const trustPoints = ["Free estimates", "Licensed and insured", COMPANY.cityLine];
+  const trustPoints = ["Easy phone scheduling", "Licensed and insured", "Clear estimates before work begins"];
 
   return html`
     <section className="hero">
@@ -214,7 +214,7 @@ function Hero({ eyebrow, title, lead, primaryCta, secondaryCta, note }) {
           </div>
 
           <aside className="hero-aside" aria-label="Business highlights">
-            <p className="hero-aside-label">Simple, local, dependable</p>
+            <p className="hero-aside-label">Simple help you can feel good about</p>
 
             <div className="hero-aside-card">
               <ul className="hero-points">
@@ -266,8 +266,9 @@ function Footer() {
 export function SiteLayout({ activePage, hero, children }) {
   return html`
     <${React.Fragment}>
+      <a className="skip-link" href="#main-content">Skip to main content</a>
       <${Header} activePage=${activePage} />
-      <main className="site-shell">
+      <main id="main-content" className="site-shell">
         <${Hero}
           eyebrow=${hero.eyebrow}
           title=${hero.title}
@@ -345,12 +346,16 @@ export function EstimateForm() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    setStatus("Thanks. This demo form captured your request locally. The next step is wiring it to email or a CRM.");
+    setStatus("Thanks. Your request was saved in this demo. The next step is connecting this form to email or a customer system.");
     event.target.reset();
   }
 
   return html`
     <form className="estimate-form" onSubmit=${handleSubmit}>
+      <p className="form-help">
+        Prefer to talk instead? Call <a className="text-link" href=${`tel:${COMPANY.phoneDigits}`}>${COMPANY.phoneDisplay}</a>.
+      </p>
+
       <label>
         Full Name
         <input type="text" name="name" required autocomplete="name" />
@@ -358,7 +363,7 @@ export function EstimateForm() {
 
       <label>
         Phone Number
-        <input type="tel" name="phone" required autocomplete="tel" />
+        <input type="tel" name="phone" required autocomplete="tel" inputmode="tel" />
       </label>
 
       <label>

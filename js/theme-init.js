@@ -4,21 +4,21 @@
   const LIGHT_THEME = "light";
 
   function normalizeTheme(theme) {
-    return theme === LIGHT_THEME ? LIGHT_THEME : DARK_THEME;
+    return theme === DARK_THEME ? DARK_THEME : LIGHT_THEME;
   }
 
-  let theme = DARK_THEME;
+  let theme = LIGHT_THEME;
 
   try {
     theme = normalizeTheme(window.localStorage.getItem(THEME_STORAGE_KEY));
   } catch (error) {
-    theme = DARK_THEME;
+    theme = LIGHT_THEME;
   }
 
   document.documentElement.dataset.theme = theme;
 
   const themeColorMeta = document.querySelector('meta[name="theme-color"]');
   if (themeColorMeta) {
-    themeColorMeta.setAttribute("content", theme === LIGHT_THEME ? "#f3f3f3" : "#000000");
+    themeColorMeta.setAttribute("content", theme === LIGHT_THEME ? "#faf8f3" : "#000000");
   }
 })();

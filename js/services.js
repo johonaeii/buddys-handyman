@@ -119,19 +119,19 @@ function ServicesPage() {
     <${SiteLayout}
       activePage="services"
       hero=${{
-        eyebrow: "Top Rated Services in Albuquerque",
-        title: "When you need a job done, call Buddy",
+        eyebrow: "Home Repair And Handyman Help",
+        title: "Call Buddy when you want clear answers and careful work.",
         lead:
-          "These are the most called and most quoted jobs from last year, and the work Buddy's completes every week across Albuquerque and Rio Rancho.",
+          "Below are the repair and handyman jobs Buddy is asked to do most often in Albuquerque and Rio Rancho.",
         primaryCta: { label: "Request a Free Estimate", href: "contact.html" },
         secondaryCta: { label: `Call ${COMPANY.phoneDisplay}`, href: `tel:${COMPANY.phoneDigits}` },
-        note: "Trusted across Bernalillo County.",
+        note: "If you are not sure where your project fits, call and ask.",
       }}
     >
       <${Section}
         id="service-cards"
-        title="Top 6 Most Called and Most Quoted Services"
-        lead="If you need one of these six jobs, this is Buddy's core specialty list."
+        title="Most Requested Services"
+        lead="These are the jobs homeowners ask Buddy about most often."
       >
         <div className="card-grid three-col">
           ${TOP_ROI_SERVICE_GROUPS.map(
@@ -148,8 +148,8 @@ function ServicesPage() {
 
       <${Section}
         id="additional-services"
-        title="Additional Services Also Available"
-        lead="Along with the top 6 services above, Buddy's also handles the following jobs."
+        title="Other Services Also Available"
+        lead="Along with the services above, Buddy also helps with the following work."
       >
         <div className="card-grid three-col">
           ${ADDITIONAL_SERVICE_GROUPS.map(
@@ -167,8 +167,8 @@ function ServicesPage() {
 
       <${Section}
         id="value-props"
-        title="How Buddy's Works"
-        lead="Built around top-performing service categories while still supporting broader home repair needs."
+        title="What Customers Can Expect"
+        lead="Straightforward service, respectful communication, and careful work in your home."
       >
         <div className="chip-row">
           <span className="chip">No job too small</span>
@@ -182,7 +182,7 @@ function ServicesPage() {
 
       <${ContactStrip}
         title="Not sure which category fits your project?"
-        text="Send a quick description and Buddy will match your project to one of the six core service categories."
+        text="Describe the job in simple terms and Buddy will help you figure out the next step."
         buttonLabel="Start Your Estimate"
         buttonHref="contact.html"
       />
