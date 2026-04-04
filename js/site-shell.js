@@ -75,18 +75,26 @@ function Header({ activePage }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [theme, setTheme] = React.useState(getInitialTheme);
   const isDarkMode = theme === DARK_THEME;
+  const headerRef = React.useRef(null);
 
   React.useEffect(() => {
-    const closeOnWideScreens = () => {
-      if (window.innerWidth > 860) {
+    const handlePointerDown = (event) => {
+      if (headerRef.current && !headerRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
         setIsMenuOpen(false);
       }
     };
 
-    window.addEventListener("resize", closeOnWideScreens);
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      window.removeEventListener("resize", closeOnWideScreens);
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
@@ -104,7 +112,7 @@ function Header({ activePage }) {
   return html`
     <header className=${isMenuOpen ? "top-header menu-open" : "top-header"} aria-label="Main navigation">
       <div className="container">
-        <div className="header-shell">
+        <div className="header-shell" ref=${headerRef}>
           <div className="header-bar">
             <a className="brand" href="index.html" aria-label="Buddy's Handyman Services home" onClick=${closeMenu}>
               <span className="brand-mark" aria-hidden="true">
@@ -121,10 +129,13 @@ function Header({ activePage }) {
               type="button"
               aria-expanded=${isMenuOpen}
               aria-controls="primary-nav"
+              aria-haspopup="true"
+              aria-label=${isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
               onClick=${() => setIsMenuOpen((open) => !open)}
             >
-              <span className="nav-toggle-label">Menu</span>
+              <span className="sr-only">${isMenuOpen ? "Close menu" : "Open menu"}</span>
               <span className="nav-toggle-lines" aria-hidden="true">
+                <span></span>
                 <span></span>
                 <span></span>
               </span>
@@ -132,42 +143,44 @@ function Header({ activePage }) {
           </div>
 
           <div id="primary-nav" className=${isMenuOpen ? "header-panel is-open" : "header-panel"}>
-            <nav className="nav-bar" aria-label="Primary">
-              <ul className="nav-list">
-                ${NAV_LINKS.map(
-                  (link) => html`
-                    <li key=${link.id}>
-                      <a
-                        className=${link.id === activePage ? "nav-link is-active" : "nav-link"}
-                        href=${link.href}
-                        aria-current=${link.id === activePage ? "page" : undefined}
-                        onClick=${closeMenu}
-                      >
-                        ${link.label}
-                      </a>
-                    </li>
-                  `,
-                )}
-              </ul>
-            </nav>
+            <div className="menu-dropdown">
+              <nav className="nav-bar" aria-label="Primary">
+                <ul className="nav-list">
+                  ${NAV_LINKS.map(
+                    (link) => html`
+                      <li key=${link.id}>
+                        <a
+                          className=${link.id === activePage ? "nav-link is-active" : "nav-link"}
+                          href=${link.href}
+                          aria-current=${link.id === activePage ? "page" : undefined}
+                          onClick=${closeMenu}
+                        >
+                          ${link.label}
+                        </a>
+                      </li>
+                    `,
+                  )}
+                </ul>
+              </nav>
 
-            <div className="quick-contact">
-              <a className="phone-link" href=${`tel:${COMPANY.phoneDigits}`} onClick=${closeMenu}>
-                Call ${COMPANY.phoneDisplay}
-              </a>
-              <button
-                className=${isDarkMode ? "btn btn-ghost theme-toggle is-active" : "btn btn-ghost theme-toggle"}
-                type="button"
-                aria-pressed=${isDarkMode}
-                aria-label=${isDarkMode ? "Dark mode is on. Activate to switch to light mode." : "Dark mode is off. Activate to switch to dark mode."}
-                onClick=${toggleTheme}
-              >
-                <span className="theme-toggle-label">Dark Mode</span>
-                <span className="theme-toggle-state">${isDarkMode ? "On" : "Off"}</span>
-              </button>
-              <a className="btn btn-solid header-cta" href="contact.html" onClick=${closeMenu}>
-                Free Estimate
-              </a>
+              <div className="quick-contact">
+                <button
+                  className=${isDarkMode ? "btn btn-ghost theme-toggle is-active" : "btn btn-ghost theme-toggle"}
+                  type="button"
+                  aria-pressed=${isDarkMode}
+                  aria-label=${isDarkMode ? "Dark mode is on. Activate to switch to light mode." : "Dark mode is off. Activate to switch to dark mode."}
+                  onClick=${toggleTheme}
+                >
+                  <span className="theme-toggle-label">Dark Mode</span>
+                  <span className="theme-toggle-state">${isDarkMode ? "On" : "Off"}</span>
+                </button>
+                <a className="phone-link" href=${`tel:${COMPANY.phoneDigits}`} onClick=${closeMenu}>
+                  Call ${COMPANY.phoneDisplay}
+                </a>
+                <a className="btn btn-solid header-cta" href="contact.html" onClick=${closeMenu}>
+                  Free Estimate
+                </a>
+              </div>
             </div>
           </div>
         </div>
