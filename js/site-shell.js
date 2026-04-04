@@ -164,6 +164,12 @@ function Header({ activePage }) {
               </nav>
 
               <div className="quick-contact">
+                <a className="btn btn-solid header-cta" href="contact.html" onClick=${closeMenu}>
+                  Free Estimate
+                </a>
+                <a className="phone-link" href=${`tel:${COMPANY.phoneDigits}`} onClick=${closeMenu}>
+                  Call ${COMPANY.phoneDisplay}
+                </a>
                 <button
                   className=${isDarkMode ? "btn btn-ghost theme-toggle is-active" : "btn btn-ghost theme-toggle"}
                   type="button"
@@ -174,12 +180,6 @@ function Header({ activePage }) {
                   <span className="theme-toggle-label">Dark Mode</span>
                   <span className="theme-toggle-state">${isDarkMode ? "On" : "Off"}</span>
                 </button>
-                <a className="phone-link" href=${`tel:${COMPANY.phoneDigits}`} onClick=${closeMenu}>
-                  Call ${COMPANY.phoneDisplay}
-                </a>
-                <a className="btn btn-solid header-cta" href="contact.html" onClick=${closeMenu}>
-                  Free Estimate
-                </a>
               </div>
             </div>
           </div>

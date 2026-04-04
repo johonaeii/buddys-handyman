@@ -99,11 +99,13 @@ body {
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 7rem;
 }
 
 body {
   position: relative;
   min-height: 100vh;
+  overflow-x: clip;
   font-family: "Manrope", "Segoe UI", sans-serif;
   color: var(--ink);
   background:
@@ -319,6 +321,10 @@ textarea:focus {
 }
 
 .header-panel.is-open {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  right: 0;
+  z-index: 5;
   display: block;
 }
 
@@ -330,6 +336,7 @@ textarea:focus {
   border: 1px solid var(--line);
   background: var(--panel-bg);
   box-shadow: var(--shadow-md);
+  overflow: hidden;
 }
 
 .nav-bar {
@@ -355,6 +362,7 @@ textarea:focus {
   color: var(--ink-soft);
   font-weight: 700;
   text-decoration: none;
+  overflow-wrap: anywhere;
   transition: border-color 0.18s ease, background-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
 }
 
@@ -667,6 +675,10 @@ h3 {
   contain-intrinsic-size: 720px;
 }
 
+.section[id] {
+  scroll-margin-top: 7rem;
+}
+
 .section-head {
   margin-bottom: 1.25rem;
 }
@@ -975,6 +987,11 @@ textarea:focus {
     border-radius: 1.4rem;
   }
 
+  .header-panel.is-open {
+    position: static;
+    margin-top: 0.3rem;
+  }
+
   .menu-dropdown {
     width: 100%;
   }
@@ -998,7 +1015,41 @@ textarea:focus {
     padding-top: 0.95rem;
   }
 
+  .top-header {
+    padding-top: 0.45rem;
+  }
+
+  .header-shell {
+    padding: 0.82rem;
+    border-radius: 1.25rem;
+  }
+
+  .menu-dropdown {
+    padding: 0.78rem;
+    border-radius: 1.1rem;
+  }
+
+  .nav-list,
+  .quick-contact,
+  .card-grid,
+  .process-list,
+  .footer-grid {
+    gap: 0.78rem;
+  }
+
+  .nav-link {
+    min-height: 44px;
+    padding: 0.7rem 0.9rem;
+  }
+
+  .btn,
+  .phone-link {
+    min-height: 46px;
+    padding: 0.8rem 1rem;
+  }
+
   .hero-shell {
+    gap: 0.9rem;
     padding: 1.1rem;
     border-radius: 1.5rem;
   }
@@ -1016,6 +1067,27 @@ textarea:focus {
 
   .hero-note {
     max-width: 34ch;
+    margin-top: 0.85rem;
+    font-size: 0.92rem;
+  }
+
+  .hero-lead {
+    margin-top: 0.9rem;
+    font-size: 1rem;
+  }
+
+  .hero-aside {
+    gap: 0.75rem;
+  }
+
+  .hero-aside-card,
+  .hero-contact-card,
+  .rating-panel {
+    padding: 0.95rem;
+  }
+
+  .hero-points {
+    gap: 0.65rem;
   }
 
   .hero-shell::after {
@@ -1040,6 +1112,10 @@ textarea:focus {
     padding: 1.8rem 0;
   }
 
+  .section-head {
+    margin-bottom: 1rem;
+  }
+
   .card,
   .process-list li,
   .estimate-form,
@@ -1047,10 +1123,34 @@ textarea:focus {
     padding: 1.05rem;
   }
 
+  .chip-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+  }
+
+  .chip {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 0.72rem 0.9rem;
+  }
+
   .strip-row {
+    gap: 0.85rem;
     flex-direction: column;
     align-items: flex-start;
-    padding: 1.2rem;
+    padding: 1rem;
+    border-radius: 1.25rem;
+  }
+
+  .strip-row p {
+    max-width: none;
+  }
+
+  input,
+  select,
+  textarea {
+    padding: 0.82rem 0.9rem;
   }
 }
 
@@ -1083,6 +1183,29 @@ textarea:focus {
     width: 100%;
   }
 
+  .header-shell {
+    padding: 0.72rem;
+    border-radius: 1.1rem;
+  }
+
+  .menu-dropdown {
+    padding: 0.7rem;
+  }
+
+  .hero-shell {
+    padding: 0.95rem;
+    border-radius: 1.2rem;
+  }
+
+  .hero-lead {
+    font-size: 0.98rem;
+  }
+
+  h1 {
+    font-size: clamp(1.85rem, 11vw, 2.45rem);
+    line-height: 1.04;
+  }
+
   .quick-contact .btn,
   .phone-link {
     width: 100%;
@@ -1091,6 +1214,21 @@ textarea:focus {
   .nav-toggle {
     width: 3rem;
     height: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand small {
+    display: none;
+  }
+
+  .brand strong {
+    font-size: 0.88rem;
+  }
+
+  .container,
+  .copyright {
+    width: min(100% - 0.85rem, var(--max));
   }
 }
 
