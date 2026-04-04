@@ -20,6 +20,49 @@ const NAV_LINKS = [
   // { id: "resources", label: "Resources", href: "resources.html" },
 ];
 
+const THEME_STORAGE_KEY = "bhs-theme";
+const DARK_THEME = "dark";
+const LIGHT_THEME = "light";
+
+function normalizeTheme(theme) {
+  return theme === LIGHT_THEME ? LIGHT_THEME : DARK_THEME;
+}
+
+function getInitialTheme() {
+  if (typeof document !== "undefined") {
+    const documentTheme = document.documentElement.dataset.theme;
+    if (documentTheme) {
+      return normalizeTheme(documentTheme);
+    }
+  }
+
+  if (typeof window !== "undefined") {
+    try {
+      return normalizeTheme(window.localStorage.getItem(THEME_STORAGE_KEY));
+    } catch (error) {
+      return DARK_THEME;
+    }
+  }
+
+  return DARK_THEME;
+}
+
+function applyTheme(theme) {
+  const nextTheme = normalizeTheme(theme);
+  document.documentElement.dataset.theme = nextTheme;
+
+  const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+  if (themeColorMeta) {
+    themeColorMeta.setAttribute("content", nextTheme === LIGHT_THEME ? "#f3f3f3" : "#000000");
+  }
+
+  try {
+    window.localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+  } catch (error) {
+    // Ignore storage failures and continue with the in-memory selection.
+  }
+}
+
 export function mount(component) {
   const rootElement = document.getElementById("app");
   if (!rootElement) {
@@ -30,6 +73,8 @@ export function mount(component) {
 
 function Header({ activePage }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [theme, setTheme] = React.useState(getInitialTheme);
+  const isDarkMode = theme === DARK_THEME;
 
   React.useEffect(() => {
     const closeOnWideScreens = () => {
@@ -49,7 +94,12 @@ function Header({ activePage }) {
     setIsMenuOpen(false);
   }, [activePage]);
 
+  React.useEffect(() => {
+    applyTheme(theme);
+  }, [theme]);
+
   const closeMenu = () => setIsMenuOpen(false);
+  const toggleTheme = () => setTheme((currentTheme) => (currentTheme === DARK_THEME ? LIGHT_THEME : DARK_THEME));
 
   return html`
     <header className=${isMenuOpen ? "top-header menu-open" : "top-header"} aria-label="Main navigation">
@@ -105,6 +155,16 @@ function Header({ activePage }) {
               <a className="phone-link" href=${`tel:${COMPANY.phoneDigits}`} onClick=${closeMenu}>
                 Call ${COMPANY.phoneDisplay}
               </a>
+              <button
+                className=${isDarkMode ? "btn btn-ghost theme-toggle is-active" : "btn btn-ghost theme-toggle"}
+                type="button"
+                aria-pressed=${isDarkMode}
+                aria-label=${isDarkMode ? "Dark mode is on. Activate to switch to light mode." : "Dark mode is off. Activate to switch to dark mode."}
+                onClick=${toggleTheme}
+              >
+                <span className="theme-toggle-label">Dark Mode</span>
+                <span className="theme-toggle-state">${isDarkMode ? "On" : "Off"}</span>
+              </button>
               <a className="btn btn-solid header-cta" href="contact.html" onClick=${closeMenu}>
                 Free Estimate
               </a>
