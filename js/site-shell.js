@@ -5,19 +5,78 @@ export const COMPANY = {
   owner: "Eric Pacheco",
   phoneDisplay: "(505) 555-0199",
   phoneDigits: "+15055550199",
-  email: "hello@buddyshandyman.com",
+  textDisplay: "(505) 555-0199",
+  textDigits: "+15055550199",
+  email: "",
   cityLine: "Serving Albuquerque and Rio Rancho",
-  licenseLabel: "NM Contractor License #000000",
+  serviceAreaLine: "Reliable handyman help for Albuquerque and Rio Rancho homeowners and families.",
+  responseLine: "Call or text to talk through the job, ask questions, and check the next opening.",
+  businessHours: ["Monday to Friday: 8 AM to 6 PM", "Saturday: By appointment", "Sunday: Closed"],
+  licenseLabel: "",
   licenseUrl: "https://www.rld.nm.gov/construction-industries/",
+  googleReviewsUrl: "",
+  warrantyLabel: "",
 };
+
+export const FEATURED_SERVICES = [
+  {
+    id: "drywall",
+    title: "Drywall and Texture Repair",
+    eyebrow: "Walls",
+    href: "drywall-texture.html",
+    text: "Patch holes, repair damage, and blend texture so the wall looks clean again.",
+  },
+  {
+    id: "painting",
+    title: "Interior and Exterior Painting",
+    eyebrow: "Paint",
+    href: "painting.html",
+    text: "Refresh rooms, trim, doors, and exterior surfaces with careful prep and clean finish work.",
+  },
+  {
+    id: "tile",
+    title: "Tile Repair and Installation",
+    eyebrow: "Tile",
+    href: "tile.html",
+    text: "Replace cracked tile, repair problem areas, and finish kitchens, baths, and floors neatly.",
+  },
+  {
+    id: "plumbing",
+    title: "Water Heaters and Plumbing Fixes",
+    eyebrow: "Plumbing",
+    href: "plumbing-water-heaters.html",
+    text: "Handle water heater issues, faucet and shower repairs, drain hardware, and disposal replacements.",
+  },
+  {
+    id: "trim",
+    title: "Trim, Baseboards, and Finish Carpentry",
+    eyebrow: "Finish Work",
+    href: "trim-carpentry.html",
+    text: "Tighten up the final look of a room with baseboards, trim repair, and clean finishing details.",
+  },
+];
+
+export const FORM_SERVICE_OPTIONS = [
+  "Drywall and texture repair",
+  "Interior or exterior painting",
+  "Tile repair or installation",
+  "Water heater or plumbing repair",
+  "Trim and baseboards",
+  "General handyman help",
+];
+
+export const TRUST_PROMISES = [
+  "Phone-first scheduling for homeowners and family helpers",
+  "Straightforward estimates before work begins",
+  "Respectful work inside the home",
+  "Local service focused on Albuquerque and Rio Rancho",
+];
 
 const NAV_LINKS = [
   { id: "home", label: "Home", href: "index.html" },
   { id: "services", label: "Services", href: "services.html" },
-  { id: "trust", label: "About", href: "trust.html" },
-  { id: "reviews", label: "Reviews", href: "reviews.html" },
+  { id: "about", label: "About", href: "trust.html" },
   { id: "contact", label: "Contact", href: "contact.html" },
-  // { id: "resources", label: "Resources", href: "resources.html" },
 ];
 
 const THEME_STORAGE_KEY = "bhs-theme";
@@ -53,14 +112,20 @@ function applyTheme(theme) {
 
   const themeColorMeta = document.querySelector('meta[name="theme-color"]');
   if (themeColorMeta) {
-    themeColorMeta.setAttribute("content", nextTheme === LIGHT_THEME ? "#faf8f3" : "#000000");
+    themeColorMeta.setAttribute("content", nextTheme === LIGHT_THEME ? "#f5f3ee" : "#0f2027");
   }
 
   try {
     window.localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
   } catch (error) {
-    // Ignore storage failures and continue with the in-memory selection.
+    // Ignore storage failures and keep the current in-memory value.
   }
+}
+
+function encodeFormData(data) {
+  return Object.keys(data)
+    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+    .join("&");
 }
 
 export function mount(component) {
@@ -68,13 +133,33 @@ export function mount(component) {
   if (!rootElement) {
     return;
   }
+
   createRoot(rootElement).render(component);
+}
+
+export function getCallHref() {
+  return `tel:${COMPANY.phoneDigits}`;
+}
+
+export function getTextHref() {
+  return `sms:${COMPANY.textDigits}`;
+}
+
+function ActionButtons({ includeEstimate = true, stacked = false, estimateHref = "contact.html#estimate-form" }) {
+  return html`
+    <div className=${stacked ? "action-row is-stacked" : "action-row"}>
+      <a className="btn btn-solid" href=${getCallHref()}>Call Now</a>
+      <a className="btn btn-ghost" href=${getTextHref()}>Text Buddy</a>
+      ${includeEstimate
+        ? html`<a className="btn btn-soft" href=${estimateHref}>Request Estimate</a>`
+        : null}
+    </div>
+  `;
 }
 
 function Header({ activePage }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [theme, setTheme] = React.useState(getInitialTheme);
-  const isDarkMode = theme === DARK_THEME;
   const headerRef = React.useRef(null);
 
   React.useEffect(() => {
@@ -83,6 +168,7 @@ function Header({ activePage }) {
         setIsMenuOpen(false);
       }
     };
+
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
         setIsMenuOpen(false);
@@ -106,15 +192,15 @@ function Header({ activePage }) {
     applyTheme(theme);
   }, [theme]);
 
-  const closeMenu = () => setIsMenuOpen(false);
+  const isDarkMode = theme === DARK_THEME;
   const toggleTheme = () => setTheme((currentTheme) => (currentTheme === DARK_THEME ? LIGHT_THEME : DARK_THEME));
 
   return html`
-    <header className=${isMenuOpen ? "top-header menu-open" : "top-header"} aria-label="Main navigation">
+    <header className="top-header">
       <div className="container">
         <div className="header-shell" ref=${headerRef}>
-          <div className="header-bar">
-            <a className="brand" href="index.html" aria-label="Buddy's Handyman Services home" onClick=${closeMenu}>
+          <div className="header-row">
+            <a className="brand" href="index.html" aria-label="Buddy's Handyman Services home">
               <span className="brand-mark" aria-hidden="true">
                 <img className="brand-logo" src="images/bhs-favicon.png" alt="" />
               </span>
@@ -124,27 +210,8 @@ function Header({ activePage }) {
               </span>
             </a>
 
-            <button
-              className="nav-toggle"
-              type="button"
-              aria-expanded=${isMenuOpen}
-              aria-controls="primary-nav"
-              aria-haspopup="true"
-              aria-label=${isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-              onClick=${() => setIsMenuOpen((open) => !open)}
-            >
-              <span className="sr-only">${isMenuOpen ? "Close menu" : "Open menu"}</span>
-              <span className="nav-toggle-lines" aria-hidden="true">
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
-            </button>
-          </div>
-
-          <div id="primary-nav" className=${isMenuOpen ? "header-panel is-open" : "header-panel"}>
-            <div className="menu-dropdown">
-              <nav className="nav-bar" aria-label="Primary">
+            <div className="header-desktop-tools">
+              <nav className="desktop-nav" aria-label="Primary">
                 <ul className="nav-list">
                   ${NAV_LINKS.map(
                     (link) => html`
@@ -153,7 +220,6 @@ function Header({ activePage }) {
                           className=${link.id === activePage ? "nav-link is-active" : "nav-link"}
                           href=${link.href}
                           aria-current=${link.id === activePage ? "page" : undefined}
-                          onClick=${closeMenu}
                         >
                           ${link.label}
                         </a>
@@ -163,24 +229,62 @@ function Header({ activePage }) {
                 </ul>
               </nav>
 
-              <div className="quick-contact">
-                <a className="btn btn-solid header-cta" href="contact.html" onClick=${closeMenu}>
-                  Free Estimate
-                </a>
-                <a className="phone-link" href=${`tel:${COMPANY.phoneDigits}`} onClick=${closeMenu}>
-                  Call ${COMPANY.phoneDisplay}
-                </a>
-                <button
-                  className=${isDarkMode ? "btn btn-ghost theme-toggle is-active" : "btn btn-ghost theme-toggle"}
-                  type="button"
-                  aria-pressed=${isDarkMode}
-                  aria-label=${isDarkMode ? "Dark theme is on. Activate to switch to light theme." : "Dark theme is off. Activate to switch to dark theme."}
-                  onClick=${toggleTheme}
-                >
-                  <span className="theme-toggle-label">Dark Theme</span>
-                  <span className="theme-toggle-state">${isDarkMode ? "On" : "Off"}</span>
-                </button>
-              </div>
+              <${ActionButtons} />
+
+              <button
+                className=${isDarkMode ? "theme-toggle is-active" : "theme-toggle"}
+                type="button"
+                aria-pressed=${isDarkMode}
+                onClick=${toggleTheme}
+              >
+                ${isDarkMode ? "Light mode" : "Dark mode"}
+              </button>
+            </div>
+
+            <button
+              className="nav-toggle"
+              type="button"
+              aria-expanded=${isMenuOpen}
+              aria-controls="mobile-nav"
+              aria-label=${isMenuOpen ? "Close menu" : "Open menu"}
+              onClick=${() => setIsMenuOpen((open) => !open)}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+
+          <div id="mobile-nav" className=${isMenuOpen ? "nav-drawer is-open" : "nav-drawer"}>
+            <nav aria-label="Mobile primary">
+              <ul className="nav-list is-mobile">
+                ${NAV_LINKS.map(
+                  (link) => html`
+                    <li key=${link.id}>
+                      <a
+                        className=${link.id === activePage ? "nav-link is-active" : "nav-link"}
+                        href=${link.href}
+                        aria-current=${link.id === activePage ? "page" : undefined}
+                        onClick=${() => setIsMenuOpen(false)}
+                      >
+                        ${link.label}
+                      </a>
+                    </li>
+                  `,
+                )}
+              </ul>
+            </nav>
+
+            <div className="nav-drawer-actions">
+              <${ActionButtons} stacked=${true} />
+              <button
+                className=${isDarkMode ? "theme-toggle is-active" : "theme-toggle"}
+                type="button"
+                aria-pressed=${isDarkMode}
+                onClick=${toggleTheme}
+              >
+                ${isDarkMode ? "Light mode" : "Dark mode"}
+              </button>
             </div>
           </div>
         </div>
@@ -189,15 +293,13 @@ function Header({ activePage }) {
   `;
 }
 
-function Hero({ eyebrow, title, lead, primaryCta, secondaryCta, note }) {
-  const trustPoints = ["Easy phone scheduling", "Licensed and insured", "Clear estimates before work begins"];
-
+function Hero({ eyebrow, title, lead, primaryCta, secondaryCta, note, highlights = [] }) {
   return html`
     <section className="hero">
       <div className="container">
         <div className="hero-shell">
           <div className="hero-copy">
-            <p className="eyebrow">${eyebrow}</p>
+            ${eyebrow ? html`<p className="eyebrow">${eyebrow}</p>` : null}
             <h1>${title}</h1>
             <p className="hero-lead">${lead}</p>
 
@@ -213,20 +315,19 @@ function Hero({ eyebrow, title, lead, primaryCta, secondaryCta, note }) {
             ${note ? html`<p className="hero-note">${note}</p>` : null}
           </div>
 
-          <aside className="hero-aside" aria-label="Business highlights">
-            <p className="hero-aside-label">Simple help you can feel good about</p>
+          <aside className="hero-panel" aria-label="What to expect">
+            <p className="panel-eyebrow">Simple next steps</p>
+            <ul className="hero-highlights">
+              ${(highlights.length ? highlights : TRUST_PROMISES).map((item) => html`<li key=${item}>${item}</li>`)}
+            </ul>
 
-            <div className="hero-aside-card">
-              <ul className="hero-points">
-                ${trustPoints.map((point) => html`<li key=${point}>${point}</li>`)}
-              </ul>
-            </div>
-
-            <div className="hero-contact-card">
-              <span className="hero-contact-label">Prefer to talk first?</span>
-              <a className="hero-inline-link" href=${`tel:${COMPANY.phoneDigits}`}>
-                ${COMPANY.phoneDisplay}
-              </a>
+            <div className="panel-callout">
+              <p className="panel-title">Prefer to talk first?</p>
+              <p>${COMPANY.responseLine}</p>
+              <div className="panel-actions">
+                <a className="text-link" href=${getCallHref()}>Call ${COMPANY.phoneDisplay}</a>
+                <a className="text-link" href=${getTextHref()}>Text ${COMPANY.textDisplay}</a>
+              </div>
             </div>
           </aside>
         </div>
@@ -237,29 +338,41 @@ function Hero({ eyebrow, title, lead, primaryCta, secondaryCta, note }) {
 
 function Footer() {
   const year = new Date().getFullYear();
+
   return html`
     <footer className="site-footer">
-      <div className="container footer-grid">
-        <section>
-          <h2>${COMPANY.name}</h2>
-          <p>${COMPANY.cityLine}</p>
-          <p>Owner: ${COMPANY.owner}</p>
-        </section>
-        <section>
-          <h2>Contact</h2>
-          <p><a href=${`tel:${COMPANY.phoneDigits}`}>${COMPANY.phoneDisplay}</a></p>
-          <p><a href=${`mailto:${COMPANY.email}`}>${COMPANY.email}</a></p>
-        </section>
-        <section>
-          <h2>License</h2>
-          <p>${COMPANY.licenseLabel}</p>
-          <p>
-            <a href=${COMPANY.licenseUrl} target="_blank" rel="noreferrer">Verify with New Mexico RLD</a>
-          </p>
-        </section>
+      <div className="container">
+        <div className="footer-shell">
+          <section>
+            <h2>${COMPANY.name}</h2>
+            <p>${COMPANY.serviceAreaLine}</p>
+            <p>${COMPANY.responseLine}</p>
+          </section>
+
+          <section>
+            <h2>Contact</h2>
+            <p><a href=${getCallHref()}>Call ${COMPANY.phoneDisplay}</a></p>
+            <p><a href=${getTextHref()}>Text ${COMPANY.textDisplay}</a></p>
+            ${COMPANY.email ? html`<p><a href=${`mailto:${COMPANY.email}`}>${COMPANY.email}</a></p>` : null}
+          </section>
+
+          <section>
+            <h2>Hours</h2>
+            ${COMPANY.businessHours.map((entry) => html`<p key=${entry}>${entry}</p>`)}
+          </section>
+        </div>
+        <p className="copyright">(c) ${year} ${COMPANY.name}. All rights reserved.</p>
       </div>
-      <p className="copyright">(c) ${year} ${COMPANY.name}. All rights reserved.</p>
     </footer>
+  `;
+}
+
+function MobileActionBar() {
+  return html`
+    <div className="mobile-action-bar" aria-label="Quick contact actions">
+      <a className="btn btn-solid" href=${getCallHref()}>Call</a>
+      <a className="btn btn-ghost" href=${getTextHref()}>Text</a>
+    </div>
   `;
 }
 
@@ -269,17 +382,11 @@ export function SiteLayout({ activePage, hero, children }) {
       <a className="skip-link" href="#main-content">Skip to main content</a>
       <${Header} activePage=${activePage} />
       <main id="main-content" className="site-shell">
-        <${Hero}
-          eyebrow=${hero.eyebrow}
-          title=${hero.title}
-          lead=${hero.lead}
-          primaryCta=${hero.primaryCta}
-          secondaryCta=${hero.secondaryCta}
-          note=${hero.note}
-        />
+        ${hero ? html`<${Hero} ...${hero} />` : null}
         ${children}
       </main>
       <${Footer} />
+      <${MobileActionBar} />
     <//>
   `;
 }
@@ -288,21 +395,27 @@ export function Section({ title, lead, id, children }) {
   return html`
     <section id=${id} className="section">
       <div className="container">
-        <div className="section-head">
-          <h2>${title}</h2>
-          ${lead ? html`<p>${lead}</p>` : null}
-        </div>
+        ${(title || lead)
+          ? html`
+              <div className="section-head">
+                ${title ? html`<h2>${title}</h2>` : null}
+                ${lead ? html`<p>${lead}</p>` : null}
+              </div>
+            `
+          : null}
         ${children}
       </div>
     </section>
   `;
 }
 
-export function InfoCard({ title, text }) {
+export function InfoCard({ title, text, eyebrow, href, linkLabel = "Learn more" }) {
   return html`
     <article className="card">
+      ${eyebrow ? html`<p className="card-eyebrow">${eyebrow}</p>` : null}
       <h3>${title}</h3>
       <p>${text}</p>
+      ${href ? html`<a className="text-link" href=${href}>${linkLabel}</a>` : null}
     </article>
   `;
 }
@@ -312,7 +425,7 @@ export function TestimonialCard({ quote, author, context }) {
     <article className="card testimonial-card">
       <p className="quote">"${quote}"</p>
       <p className="author">${author}</p>
-      <p className="context">${context}</p>
+      ${context ? html`<p className="context">${context}</p>` : null}
     </article>
   `;
 }
@@ -322,108 +435,139 @@ export function ResourceCard({ title, summary, href }) {
     <article className="card resource-card">
       <h3>${title}</h3>
       <p>${summary}</p>
-      <a className="text-link" href=${href}>Read article idea</a>
+      <a className="text-link" href=${href}>Read more</a>
     </article>
   `;
 }
 
 export function ContactStrip({ title, text, buttonLabel, buttonHref }) {
   return html`
-    <section className="section section-accent">
-      <div className="container strip-row">
-        <div>
-          <h2>${title}</h2>
-          <p>${text}</p>
+    <section className="section section-tight">
+      <div className="container">
+        <div className="cta-band">
+          <div>
+            <h2>${title}</h2>
+            <p>${text}</p>
+          </div>
+          <a className="btn btn-solid" href=${buttonHref}>${buttonLabel}</a>
         </div>
-        <a className="btn btn-solid" href=${buttonHref}>${buttonLabel}</a>
       </div>
     </section>
   `;
 }
 
-export function EstimateForm() {
-  const [status, setStatus] = React.useState("");
+export function EstimateForm({ contextLabel = "Website", submitLabel = "Request Free Estimate" }) {
+  const [status, setStatus] = React.useState("idle");
+  const [message, setMessage] = React.useState("");
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    setStatus("Thanks. Your request was saved in this demo. The next step is connecting this form to email or a customer system.");
-    event.target.reset();
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const payload = {};
+
+    formData.forEach((value, key) => {
+      payload[key] = value.toString();
+    });
+
+    payload["form-name"] = "estimate-request";
+
+    setStatus("submitting");
+    setMessage("Sending your request...");
+
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encodeFormData(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error("Submission failed");
+      }
+
+      form.reset();
+      setStatus("success");
+      setMessage("Thanks. Your estimate request was sent. If the job is urgent, please call or text now.");
+    } catch (error) {
+      setStatus("error");
+      setMessage("We could not send the form online right now. Please call or text and Buddy can help you directly.");
+    }
   }
 
   return html`
-    <form className="estimate-form" onSubmit=${handleSubmit}>
-      <p className="form-help">
-        Prefer to talk instead? Call <a className="text-link" href=${`tel:${COMPANY.phoneDigits}`}>${COMPANY.phoneDisplay}</a>.
+    <form
+      className="estimate-form"
+      name="estimate-request"
+      method="POST"
+      action="/thank-you.html"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      onSubmit=${handleSubmit}
+    >
+      <input type="hidden" name="form-name" value="estimate-request" />
+      <input type="hidden" name="source" value=${contextLabel} />
+
+      <p className="sr-only">
+        <label>
+          Do not fill this out if you are human
+          <input name="bot-field" />
+        </label>
       </p>
 
-      <label>
-        Full Name
-        <input type="text" name="name" required autocomplete="name" />
-      </label>
+      <div className="form-grid">
+        <label>
+          Full Name
+          <input type="text" name="name" required autocomplete="name" />
+        </label>
 
-      <label>
-        Phone Number
-        <input type="tel" name="phone" required autocomplete="tel" inputmode="tel" />
-      </label>
+        <label>
+          Phone Number
+          <input type="tel" name="phone" required autocomplete="tel" inputmode="tel" />
+        </label>
 
-      <label>
-        Email
-        <input type="email" name="email" required autocomplete="email" />
-      </label>
+        <label>
+          Email Address
+          <input type="email" name="email" autocomplete="email" />
+        </label>
 
-      <label>
-        Service Needed
-        <select name="service" required>
-          <option value="">Choose one</option>
-          <optgroup label="Top 6 Most Requested Services">
-            <option>Tape and Texture Wall Repair</option>
-            <option>Interior or Exterior Residential Painting</option>
-            <option>Tile Repair or Installation</option>
-            <option>Water Heater Maintenance or Replacement</option>
-            <option>Faucet, Shower Valve, P-Trap, or Disposal Repair</option>
-            <option>Interior Trim and Baseboard Work</option>
-          </optgroup>
-          <optgroup label="Additional Services">
-            <option>Drywall Installation</option>
-            <option>Drywall Repair</option>
-            <option>Electrical Work</option>
-            <option>Exterior Painting</option>
-            <option>Fan Installation</option>
-            <option>Fan Repair</option>
-            <option>Flooring Repair</option>
-            <option>Furniture Assembly</option>
-            <option>General Construction</option>
-            <option>General Repairs</option>
-            <option>Gutter Cleaning</option>
-            <option>Home Maintenance and Repairs</option>
-            <option>Install Flooring</option>
-            <option>Interior Painting</option>
-            <option>Moving Assistance</option>
-            <option>Paint Indoors</option>
-            <option>Painting</option>
-            <option>Plumbing Fixture Installation</option>
-            <option>Remodeling</option>
-            <option>Repair Flooring</option>
-            <option>Repair Water Fixtures</option>
-            <option>Tile Work Installation</option>
-            <option>Tile Work Replacement</option>
-            <option>TV Mounting</option>
-            <option>Evaporative Cooler Service</option>
-            <option>Swamp Cooler Service</option>
-            <option>Cabinets</option>
-            <option>Flooring</option>
-            <option>Interior Structural Repairs</option>
-          </optgroup>
-        </select>
-      </label>
+        <label>
+          City or ZIP Code
+          <input type="text" name="location" required autocomplete="address-level2" />
+        </label>
 
-      <label>
-        Project Details
-        <textarea name="message" rows="5" placeholder="Tell us what needs to get done."></textarea>
-      </label>
+        <label>
+          Service Needed
+          <select name="service" required>
+            <option value="">Choose one</option>
+            ${FORM_SERVICE_OPTIONS.map((option) => html`<option key=${option}>${option}</option>`)}
+          </select>
+        </label>
 
-      <button className="btn btn-solid" type="submit">Request Free Estimate</button>
-      ${status ? html`<p className="form-status" role="status">${status}</p>` : null}
+        <label className="form-span-full">
+          Project Details
+          <textarea name="message" rows="5" placeholder="Tell Buddy what needs attention and when you hope to get it done."></textarea>
+        </label>
+      </div>
+
+      <div className="form-footer">
+        <button className="btn btn-solid" type="submit" disabled=${status === "submitting"}>
+          ${status === "submitting" ? "Sending..." : submitLabel}
+        </button>
+        <p className="form-help">
+          Prefer to talk right away? <a className="text-link" href=${getCallHref()}>Call ${COMPANY.phoneDisplay}</a> or
+          <a className="text-link" href=${getTextHref()}> text ${COMPANY.textDisplay}</a>.
+        </p>
+      </div>
+
+      ${message
+        ? html`
+            <p className=${status === "error" ? "form-status is-error" : "form-status"} role="status">
+              ${message}
+            </p>
+          `
+        : null}
     </form>
   `;
 }

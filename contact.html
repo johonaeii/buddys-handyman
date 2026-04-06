@@ -5,17 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Request a free estimate for Buddy's top six services and additional work including electrical, flooring, remodeling, cooler service, and general home repairs."
+      content="Call, text, or request an estimate from Buddy's Handyman Services for local home repairs in Albuquerque and Rio Rancho."
     />
-    <meta name="theme-color" content="#faf8f3" />
+    <meta name="theme-color" content="#f5f3ee" />
     <script src="js/theme-init.js"></script>
-    <title>Contact | Buddy's Handyman Services</title>
+    <title>Contact Buddy's Handyman Services</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" type="image/png" href="/images/bhs-favicon.png?v=6" />
     <link rel="shortcut icon" href="/images/bhs-favicon.png?v=6" />
     <link rel="apple-touch-icon" href="/images/bhs-favicon.png?v=6" />
   </head>
   <body>
+    <form name="estimate-request" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="estimate-request" />
+      <input type="text" name="name" />
+      <input type="tel" name="phone" />
+      <input type="email" name="email" />
+      <input type="text" name="location" />
+      <input type="text" name="service" />
+      <textarea name="message"></textarea>
+      <input type="text" name="source" />
+      <input type="text" name="bot-field" />
+    </form>
     <div id="app"></div>
     <script type="module" src="js/contact.js"></script>
   </body>

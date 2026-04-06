@@ -1,56 +1,84 @@
 import { html } from "./react-lib.js";
-import { COMPANY, EstimateForm, Section, SiteLayout, mount } from "./site-shell.js";
+import {
+  COMPANY,
+  EstimateForm,
+  Section,
+  SiteLayout,
+  getCallHref,
+  getTextHref,
+  mount,
+} from "./site-shell.js";
 
 function ContactPage() {
   return html`
     <${SiteLayout}
       activePage="contact"
       hero=${{
-        eyebrow: "Free Estimates",
-        title: "Call now or send a simple request.",
+        eyebrow: "Contact Buddy's Handyman Services",
+        title: "Call, text, or send the estimate form.",
         lead:
-          "If you would rather speak to a person, call. If a family member is helping with the repair, they can also use the form below.",
-        primaryCta: { label: `Call ${COMPANY.phoneDisplay}`, href: `tel:${COMPANY.phoneDigits}` },
-        secondaryCta: { label: "Jump to Form", href: "#estimate-form" },
-        note: "We aim to respond the same business day.",
+          "This contact page keeps only the essentials: how to reach Buddy, when to expect a response, and a form that captures the basics without wasting time.",
+        primaryCta: { label: "Call Buddy", href: getCallHref() },
+        secondaryCta: { label: "Text Buddy", href: getTextHref() },
+        note: "If a family member is helping with the repair, they can use this form too.",
       }}
     >
       <${Section}
         id="contact-options"
-        title="Contact Options"
-        lead="Choose the easiest way to reach Buddy."
+        title="Choose the easiest way to start"
+        lead="The funnel should never force someone into a form when a phone call or quick text is the better option."
       >
         <div className="card-grid three-col">
           <article className="card">
-            <h3>Phone</h3>
-            <p>
-              Best if you want to explain the job out loud and ask questions right away.
-            </p>
-            <a className="text-link" href=${`tel:${COMPANY.phoneDigits}`}>${COMPANY.phoneDisplay}</a>
+            <h3>Call</h3>
+            <p>Best for people who want to describe the job out loud and ask questions right away.</p>
+            <a className="text-link" href=${getCallHref()}>${COMPANY.phoneDisplay}</a>
           </article>
+
           <article className="card">
-            <h3>Email</h3>
-            <p>
-              Helpful when you want to send photos or coordinate for a parent, relative, or rental property.
-            </p>
-            <a className="text-link" href=${`mailto:${COMPANY.email}`}>${COMPANY.email}</a>
+            <h3>Text</h3>
+            <p>Useful when you want to send a short note first or follow up from a mobile device.</p>
+            <a className="text-link" href=${getTextHref()}>Text ${COMPANY.textDisplay}</a>
           </article>
+
           <article className="card">
-            <h3>Service Area</h3>
-            <p>
-              Serving Albuquerque and Rio Rancho, with scheduling based on the job and how urgent it is.
-            </p>
-            <p className="support-note">Local, dependable service</p>
+            <h3>Service area</h3>
+            <p>${COMPANY.cityLine}</p>
+            <p className="inline-note">${COMPANY.responseLine}</p>
           </article>
         </div>
       <//>
 
       <${Section}
         id="estimate-form"
-        title="Request Your Free Estimate"
-        lead="If forms are easier for you, this is the information Buddy needs to get started. This demo version is not connected to email yet."
+        title="Send the job details online"
+        lead="This form is wired for Netlify form handling and collects the key details Buddy needs for follow-up."
       >
-        <${EstimateForm} />
+        <div className="split-layout">
+          <aside className="contact-panel">
+            <p className="panel-eyebrow">Business hours</p>
+            <h3>When to expect a reply</h3>
+            <div className="detail-list">
+              ${COMPANY.businessHours.map(
+                (item) => html`
+                  <div key=${item}>
+                    <strong>Hours</strong>
+                    <span>${item}</span>
+                  </div>
+                `,
+              )}
+            </div>
+
+            <div className="action-row is-stacked">
+              <a className="btn btn-solid" href=${getCallHref()}>Call ${COMPANY.phoneDisplay}</a>
+              <a className="btn btn-ghost" href=${getTextHref()}>Text ${COMPANY.textDisplay}</a>
+            </div>
+          </aside>
+
+          <div>
+            <${EstimateForm} contextLabel="Contact Page" submitLabel="Send Contact Request" />
+          </div>
+        </div>
       <//>
     <//>
   `;

@@ -19,6 +19,6 @@
 
   const themeColorMeta = document.querySelector('meta[name="theme-color"]');
   if (themeColorMeta) {
-    themeColorMeta.setAttribute("content", theme === LIGHT_THEME ? "#faf8f3" : "#000000");
+    themeColorMeta.setAttribute("content", theme === LIGHT_THEME ? "#f5f3ee" : "#0f2027");
   }
 })();

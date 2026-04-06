@@ -1,117 +1,23 @@
 import { html } from "./react-lib.js";
-import { COMPANY, ContactStrip, Section, SiteLayout, mount } from "./site-shell.js";
+import {
+  ContactStrip,
+  FEATURED_SERVICES,
+  InfoCard,
+  Section,
+  SiteLayout,
+  getCallHref,
+  mount,
+} from "./site-shell.js";
 
-const TOP_ROI_SERVICE_GROUPS = [
-  {
-    title: "Tape, Texture, and Wall Patch Repair",
-    items: [
-      "Patch drywall holes and damaged sections",
-      "Match existing wall texture",
-      "Return walls to original finish quality",
-    ],
-  },
-  {
-    title: "Interior and Exterior Residential Painting",
-    items: [
-      "Interior room and trim painting",
-      "Exterior paint refreshes",
-      "Surface prep, touch-ups, and clean lines",
-    ],
-  },
-  {
-    title: "Tile Installation and Repair",
-    items: [
-      "Tile replacement for cracked or loose sections",
-      "Backsplash, floor, and wall tile work",
-      "Grout touch-up and finish detailing",
-    ],
-  },
-  {
-    title: "Water Heater Maintenance and Replacement",
-    items: [
-      "Water heater checks and routine maintenance",
-      "Diagnose common hot water issues",
-      "Replace units when repair is no longer cost-effective",
-    ],
-  },
-  {
-    title: "Faucet, Shower, P-Trap, and Disposal Repairs",
-    items: [
-      "Faucet and shower head repair or replacement",
-      "Shower valve diagnostics and replacement",
-      "P-trap fixes and garbage disposal replacement",
-    ],
-  },
-  {
-    title: "Interior Trim and Baseboards",
-    items: [
-      "Baseboard install and replacement",
-      "Interior trim repairs and finish carpentry",
-      "Seamless paint-ready finishing",
-    ],
-  },
-];
-
-const ADDITIONAL_SERVICE_GROUPS = [
-  {
-    title: "Drywall, Construction, and Structural",
-    items: [
-      "Drywall installation",
-      "Drywall repair",
-      "General construction",
-      "General repairs",
-      "Interior structural repairs",
-      "Remodeling",
-    ],
-  },
-  {
-    title: "Electrical, Fans, and Mounting",
-    items: [
-      "Electrical work",
-      "Fan installation",
-      "Fan repair",
-      "TV mounting",
-      "Furniture assembly",
-    ],
-  },
-  {
-    title: "Flooring, Cabinets, and Finish Work",
-    items: [
-      "Install flooring",
-      "Flooring installation",
-      "Flooring repair",
-      "Repair flooring",
-      "Cabinets",
-    ],
-  },
-  {
-    title: "Plumbing and Water Fixture Support",
-    items: [
-      "Plumbing fixture installation",
-      "Repair water fixtures",
-      "Home maintenance and repairs",
-    ],
-  },
-  {
-    title: "Painting and Tile Variations",
-    items: [
-      "Painting",
-      "Paint indoors",
-      "Interior painting",
-      "Exterior painting",
-      "Tile work installation",
-      "Tile work replacement",
-    ],
-  },
-  {
-    title: "Seasonal and Property Maintenance",
-    items: [
-      "Gutter cleaning",
-      "Evaporative cooler service",
-      "Swamp cooler service",
-      "Moving assistance",
-    ],
-  },
+const ADDITIONAL_HELP = [
+  "General home repairs",
+  "Fixture swaps and small updates",
+  "Fan installation and replacement",
+  "Flooring touch-ups",
+  "Cabinet adjustments",
+  "Punch-list style repairs",
+  "Property prep before photos or move-in",
+  "Seasonal maintenance items",
 ];
 
 function ServicesPage() {
@@ -119,72 +25,51 @@ function ServicesPage() {
     <${SiteLayout}
       activePage="services"
       hero=${{
-        eyebrow: "Home Repair And Handyman Help",
-        title: "Call Buddy when you want clear answers and careful work.",
+        eyebrow: "Services built for a faster yes-or-no decision",
+        title: "See what Buddy handles before you even make the call.",
         lead:
-          "Below are the repair and handyman jobs Buddy is asked to do most often in Albuquerque and Rio Rancho.",
-        primaryCta: { label: "Request a Free Estimate", href: "contact.html" },
-        secondaryCta: { label: `Call ${COMPANY.phoneDisplay}`, href: `tel:${COMPANY.phoneDigits}` },
-        note: "If you are not sure where your project fits, call and ask.",
+          "This page keeps the services organized in homeowner language so visitors can quickly tell whether Buddy is the right fit for the job.",
+        primaryCta: { label: "Call to Talk It Through", href: getCallHref() },
+        secondaryCta: { label: "Jump to the Contact Page", href: "contact.html#estimate-form" },
+        note: "Every service page ends with a simple contact path so visitors are never stranded.",
       }}
     >
       <${Section}
-        id="service-cards"
-        title="Most Requested Services"
-        lead="These are the jobs homeowners ask Buddy about most often."
+        id="featured-services"
+        title="Core service categories"
+        lead="These are the major pages the funnel now routes people into from the home page and service overview."
       >
         <div className="card-grid three-col">
-          ${TOP_ROI_SERVICE_GROUPS.map(
-            (group) => html`
-              <article className="card" key=${group.title}>
-                <h3>${group.title}</h3>
-                <ul className="bullet-list">
-                  ${group.items.map((item) => html`<li key=${item}>${item}</li>`)}</ul>
-              </article>
+          ${FEATURED_SERVICES.map(
+            (service) => html`
+              <${InfoCard}
+                key=${service.id}
+                eyebrow=${service.eyebrow}
+                title=${service.title}
+                text=${service.text}
+                href=${service.href}
+                linkLabel="Open service page"
+              />
             `,
           )}
         </div>
       <//>
 
       <${Section}
-        id="additional-services"
-        title="Other Services Also Available"
-        lead="Along with the services above, Buddy also helps with the following work."
-      >
-        <div className="card-grid three-col">
-          ${ADDITIONAL_SERVICE_GROUPS.map(
-            (group) => html`
-              <article className="card" key=${group.title}>
-                <h3>${group.title}</h3>
-                <ul className="bullet-list">
-                  ${group.items.map((item) => html`<li key=${item}>${item}</li>`)}
-                </ul>
-              </article>
-            `,
-          )}
-        </div>
-      <//>
-
-      <${Section}
-        id="value-props"
-        title="What Customers Can Expect"
-        lead="Straightforward service, respectful communication, and careful work in your home."
+        id="additional-help"
+        title="Other handyman help still fits the conversation"
+        lead="If the project is not an exact match for one of the main categories, the site still makes room for smaller repair needs and follow-up questions."
       >
         <div className="chip-row">
-          <span className="chip">No job too small</span>
-          <span className="chip">Transparent pricing</span>
-          <span className="chip">Prompt arrivals</span>
-          <span className="chip">Worksite cleanliness</span>
-          <span className="chip">Respectful communication</span>
-          <span className="chip">Free estimates</span>
+          ${ADDITIONAL_HELP.map((item) => html`<span className="chip" key=${item}>${item}</span>`)}
         </div>
       <//>
 
       <${ContactStrip}
-        title="Not sure which category fits your project?"
-        text="Describe the job in simple terms and Buddy will help you figure out the next step."
-        buttonLabel="Start Your Estimate"
-        buttonHref="contact.html"
+        title="Need help deciding where your project fits?"
+        text="Call first, describe the job in plain language, and Buddy can tell you the best next step."
+        buttonLabel="Call Buddy Now"
+        buttonHref=${getCallHref()}
       />
     <//>
   `;
