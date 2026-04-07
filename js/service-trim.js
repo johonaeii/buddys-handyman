@@ -16,15 +16,15 @@ function TrimPage() {
         eyebrow: "Trim, baseboards, and finish carpentry",
         title: "Finish the room with clean trim work and tighter details.",
         lead:
-          "This page helps visitors understand that Buddy handles the finish-stage jobs that make a home look complete again.",
+          "Baseboards, trim, and finishing details help a room look complete and well cared for.",
         primaryCta: { label: "Call About Trim Work", href: getCallHref() },
         secondaryCta: { label: "Text the Room Details", href: getTextHref() },
       }}
     >
       <${Section}
         id="typical-jobs"
-        title="Finish work this page should convert"
-        lead="Use straightforward examples that homeowners recognize right away."
+        title="Common trim and finish work"
+        lead="Examples of jobs Buddy can help with:"
       >
         <div className="split-layout">
           <article className="card">
@@ -35,10 +35,10 @@ function TrimPage() {
           </article>
 
           <article className="card">
-            <h3>Photo placeholders</h3>
+            <h3>Recent work</h3>
             <div className="photo-grid">
-              <div className="photo-placeholder">Before trim photo placeholder</div>
-              <div className="photo-placeholder">After trim photo placeholder</div>
+              <div className="photo-placeholder">Before photo</div>
+              <div className="photo-placeholder">After photo</div>
             </div>
           </article>
         </div>

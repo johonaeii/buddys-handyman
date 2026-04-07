@@ -14,35 +14,35 @@ import {
 
 const PROCESS_STEPS = [
   {
-    title: "1. Call or text the job",
-    text: "Explain what needs attention in plain language. Family members can reach out too.",
+    title: "1. Call or text",
+    text: "Tell Buddy what needs attention and share any details that would help with the estimate.",
   },
   {
-    title: "2. Get a clear next step",
-    text: "Buddy talks through the repair, timing, and whether an estimate or visit makes sense next.",
+    title: "2. Get a clear estimate",
+    text: "Talk through the repair, the next step, and the best timing for the job.",
   },
   {
-    title: "3. Move the project forward",
-    text: "Once the job is approved, scheduling stays simple and communication stays direct.",
+    title: "3. Schedule the work",
+    text: "Once everything looks right, Buddy can get your project on the calendar.",
   },
 ];
 
 const TRUST_FACTS = [
   {
     title: "Easy to understand",
-    text: "The site is built around plain language, simple next steps, and direct contact options.",
+    text: "Clear service descriptions and simple contact options make it easier to get started.",
   },
   {
     title: "Helpful for family helpers",
     text: "Adult children and caregivers can call, text, or send the estimate form for a parent or grandparent.",
   },
   {
-    title: "Focused on local jobs",
-    text: "The message stays centered on the repair work homeowners in Albuquerque and Rio Rancho ask for most.",
+    title: "Respectful service",
+    text: "Friendly communication, careful work, and clean-up matter on every job.",
   },
   {
-    title: "Built to turn visits into calls",
-    text: "Every major section points back to a call, text, or estimate request instead of sending people in circles.",
+    title: "Straightforward next steps",
+    text: "Call, text, or send the form and get a clear response about what to do next.",
   },
 ];
 
@@ -64,7 +64,7 @@ function HomePage() {
       <${Section}
         id="services-summary"
         title="Start with the most requested jobs"
-        lead="These are the service categories the site now pushes to the front so visitors can see right away that Buddy handles the work they need."
+        lead="From wall repairs to trim work, these are some of the jobs homeowners ask about most often."
       >
         <div className="card-grid three-col">
           ${FEATURED_SERVICES.map(
@@ -84,8 +84,8 @@ function HomePage() {
 
       <${Section}
         id="trust-flow"
-        title="A simpler path from question to estimate"
-        lead="The home page now guides visitors from what Buddy does, to why they should feel comfortable calling, to the next step."
+        title="How it works"
+        lead="From the first call to the finished job, the process stays simple and easy to understand."
       >
         <div className="split-layout">
           <div className="stack-list">
@@ -115,7 +115,7 @@ function HomePage() {
       <${Section}
         id="estimate"
         title="Request an estimate without the runaround"
-        lead="Call or text if that is easiest. If you want to send the details first, the form below is Netlify-ready and built to capture the basics Buddy needs."
+        lead="Call or text if that is easiest. You can also send the basics here and Buddy can follow up with the next step."
       >
         <div className="split-layout">
           <aside className="contact-panel">

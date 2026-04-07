@@ -16,15 +16,15 @@ function TilePage() {
         eyebrow: "Tile repair and installation",
         title: "Fix broken tile and finish new tile work with a cleaner result.",
         lead:
-          "This service page gives tile leads a focused landing spot without making the site feel cluttered or overly technical.",
+          "Replace damaged tile, improve worn areas, and clean up the finished look of kitchens, baths, and floors.",
         primaryCta: { label: "Call About Tile Work", href: getCallHref() },
         secondaryCta: { label: "Text the Tile Details", href: getTextHref() },
       }}
     >
       <${Section}
         id="typical-jobs"
-        title="Where this service page can help convert"
-        lead="Keep the examples centered on visible repairs and practical upgrades."
+        title="Common tile jobs"
+        lead="Examples of tile work people often call about:"
       >
         <div className="split-layout">
           <article className="card">
@@ -35,10 +35,10 @@ function TilePage() {
           </article>
 
           <article className="card">
-            <h3>Before and after gallery area</h3>
+            <h3>Recent work</h3>
             <div className="photo-grid">
-              <div className="photo-placeholder">Damaged tile photo placeholder</div>
-              <div className="photo-placeholder">Finished tile photo placeholder</div>
+              <div className="photo-placeholder">Before photo</div>
+              <div className="photo-placeholder">After photo</div>
             </div>
           </article>
         </div>

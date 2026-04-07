@@ -12,31 +12,31 @@ import {
 
 const STORY_POINTS = [
   {
-    title: "Built for busy homeowners",
-    text: "The funnel now puts the most important answers up front so people can tell quickly whether Buddy is the right person to call.",
+    title: "Local and dependable",
+    text: "Buddy's Handyman Services is centered on clear communication, dependable scheduling, and careful work from start to finish.",
   },
   {
-    title: "Helpful for adult children too",
-    text: "The copy and contact flow also support family members who are helping parents or grandparents arrange repairs.",
+    title: "Helpful for homeowners and families",
+    text: "Homeowners, adult children, and caregivers can all reach out to ask questions and coordinate repairs.",
   },
 ];
 
 const TRUST_POINTS = [
   {
-    title: "Call or text first",
-    text: "Visitors do not have to decode a complicated website before they reach out.",
+    title: "Clear estimates",
+    text: "Talk through the job, ask questions, and understand the next step before work begins.",
   },
   {
-    title: "Clear estimate path",
-    text: "Every major page ends with the same simple next step: call, text, or send the estimate form.",
+    title: "Respectful service",
+    text: "Friendly communication, careful work, and a clean finish matter on every job.",
+  },
+  {
+    title: "Licensed and insured",
+    text: "Business details, coverage information, and other credentials can be shared as soon as they are finalized.",
   },
   {
     title: "Local service area",
-    text: "The messaging stays focused on Albuquerque and Rio Rancho instead of trying to sound broad or generic.",
-  },
-  {
-    title: "Ready for proof assets",
-    text: "This page is structured to accept verified reviews, licensing details, photos, and warranty information as soon as they are supplied.",
+    text: "Serving Albuquerque and Rio Rancho with practical repair help for everyday home projects.",
   },
 ];
 
@@ -48,16 +48,16 @@ function AboutPage() {
         eyebrow: "About Buddy's Handyman Services",
         title: "Trust is easier when the next step is clear.",
         lead:
-          "The About page now combines story, trust-building details, and review-ready sections so visitors can feel comfortable reaching out without digging through multiple pages.",
+          "Buddy's Handyman Services is built around clear communication, dependable service, and careful work in the home.",
         primaryCta: { label: "Call Buddy", href: getCallHref() },
         secondaryCta: { label: "Text Buddy", href: getTextHref() },
-        note: "As verified reviews, license details, and project photos come in, this page is ready to hold them in one place.",
+        note: "Clear communication, careful work, and dependable follow-through matter on every job.",
       }}
     >
       <${Section}
         id="story"
-        title="What this page needs to communicate"
-        lead="The client wanted a simpler site that still feels trustworthy, family-friendly, and easy to understand."
+        title="Straightforward, neighborly service"
+        lead="Home repair should feel simple and comfortable from the first call."
       >
         <div className="card-grid two-col">
           ${STORY_POINTS.map(
@@ -68,8 +68,8 @@ function AboutPage() {
 
       <${Section}
         id="trust-signals"
-        title="Trust details the funnel can hold"
-        lead="These blocks replace the old split between trust and reviews so the site can tell one consistent story."
+        title="What you can expect"
+        lead="Clear answers, honest estimates, and work done with care."
       >
         <div className="card-grid two-col">
           ${TRUST_POINTS.map(
@@ -85,7 +85,12 @@ function AboutPage() {
                   </a>
                 </article>
               `
-            : null}
+            : html`
+                <article className="card">
+                  <h3>License information</h3>
+                  <p>License details available on request.</p>
+                </article>
+              `}
           ${COMPANY.warrantyLabel
             ? html`
                 <article className="card">
@@ -93,20 +98,25 @@ function AboutPage() {
                   <p>${COMPANY.warrantyLabel}</p>
                 </article>
               `
-            : null}
+            : html`
+                <article className="card">
+                  <h3>Workmanship coverage</h3>
+                  <p>Warranty details available on request.</p>
+                </article>
+              `}
         </div>
       <//>
 
       <${Section}
         id="reviews"
-        title="Reviews and proof"
-        lead="Verified customer reviews should live here as soon as the Google Business Profile link and approved testimonials are available."
+        title="Reviews and project photos"
+        lead="Customer feedback and project photos help show the quality of the work."
       >
         <div className="split-layout">
           <article className="card">
-            <h3>Google review link</h3>
+            <h3>Customer reviews</h3>
             <p>
-              Add the official review or profile URL here so visitors can confirm Buddy's reputation without leaving the funnel feeling unfinished.
+              Customer reviews help homeowners feel comfortable before they call.
             </p>
             ${COMPANY.googleReviewsUrl
               ? html`
@@ -114,26 +124,26 @@ function AboutPage() {
                     See Reviews on Google
                   </a>
                 `
-              : html`<p className="inline-note">Google review link can be connected here when ready.</p>`}
+              : html`<p className="inline-note">Recent customer feedback will appear here.</p>`}
           </article>
 
           <article className="card">
-            <h3>Job photos and customer proof</h3>
+            <h3>Recent project photos</h3>
             <p>
-              Before-and-after photos, short job stories, and approved testimonials can be dropped into this layout without changing the rest of the page structure.
+              Project photos can show repair quality, finished work, and the kinds of jobs Buddy handles most often.
             </p>
             <div className="photo-grid">
-              <div className="photo-placeholder">Before photo placeholder</div>
-              <div className="photo-placeholder">After photo placeholder</div>
+              <div className="photo-placeholder">Project photo</div>
+              <div className="photo-placeholder">Finished result</div>
             </div>
           </article>
         </div>
       <//>
 
       <${ContactStrip}
-        title="Want to talk through the job instead of reading more?"
-        text="Call or text Buddy and explain the repair in your own words."
-        buttonLabel="Go to Contact"
+        title="Have a job you'd like to talk through?"
+        text="Call or text Buddy and explain what needs to be done."
+        buttonLabel="Contact Buddy"
         buttonHref="contact.html"
       />
     <//>

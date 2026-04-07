@@ -25,19 +25,19 @@ function ServicesPage() {
     <${SiteLayout}
       activePage="services"
       hero=${{
-        eyebrow: "Services built for a faster yes-or-no decision",
+        eyebrow: "Local handyman services",
         title: "See what Buddy handles before you even make the call.",
         lead:
-          "This page keeps the services organized in homeowner language so visitors can quickly tell whether Buddy is the right fit for the job.",
+          "From small repairs to finish work, Buddy helps with the kinds of jobs homeowners need done carefully and clearly.",
         primaryCta: { label: "Call to Talk It Through", href: getCallHref() },
         secondaryCta: { label: "Jump to the Contact Page", href: "contact.html#estimate-form" },
-        note: "Every service page ends with a simple contact path so visitors are never stranded.",
+        note: "If you are not sure which service fits your project, call or text and ask.",
       }}
     >
       <${Section}
         id="featured-services"
         title="Core service categories"
-        lead="These are the major pages the funnel now routes people into from the home page and service overview."
+        lead="Browse the main service categories below to see how Buddy can help with your project."
       >
         <div className="card-grid three-col">
           ${FEATURED_SERVICES.map(
@@ -57,8 +57,8 @@ function ServicesPage() {
 
       <${Section}
         id="additional-help"
-        title="Other handyman help still fits the conversation"
-        lead="If the project is not an exact match for one of the main categories, the site still makes room for smaller repair needs and follow-up questions."
+        title="Other handyman help is available too"
+        lead="If your project is not listed here, reach out anyway. Many smaller repairs and follow-up jobs still fit the work Buddy handles."
       >
         <div className="chip-row">
           ${ADDITIONAL_HELP.map((item) => html`<span className="chip" key=${item}>${item}</span>`)}

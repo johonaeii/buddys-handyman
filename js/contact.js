@@ -17,7 +17,7 @@ function ContactPage() {
         eyebrow: "Contact Buddy's Handyman Services",
         title: "Call, text, or send the estimate form.",
         lead:
-          "This contact page keeps only the essentials: how to reach Buddy, when to expect a response, and a form that captures the basics without wasting time.",
+          "Choose the contact option that feels easiest and send over the basics of your project.",
         primaryCta: { label: "Call Buddy", href: getCallHref() },
         secondaryCta: { label: "Text Buddy", href: getTextHref() },
         note: "If a family member is helping with the repair, they can use this form too.",
@@ -26,7 +26,7 @@ function ContactPage() {
       <${Section}
         id="contact-options"
         title="Choose the easiest way to start"
-        lead="The funnel should never force someone into a form when a phone call or quick text is the better option."
+        lead="Call, text, or send the estimate form. Whatever is easiest for you is fine."
       >
         <div className="card-grid three-col">
           <article className="card">
@@ -52,7 +52,7 @@ function ContactPage() {
       <${Section}
         id="estimate-form"
         title="Send the job details online"
-        lead="This form is wired for Netlify form handling and collects the key details Buddy needs for follow-up."
+        lead="Share a few details about the job and Buddy can follow up with the next step."
       >
         <div className="split-layout">
           <aside className="contact-panel">

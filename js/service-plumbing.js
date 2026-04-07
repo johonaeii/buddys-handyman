@@ -16,15 +16,15 @@ function PlumbingPage() {
         eyebrow: "Water heaters and plumbing fixes",
         title: "Get the plumbing issue described clearly and moving toward a fix.",
         lead:
-          "This page combines water heater and common plumbing repair messaging so homeowners can quickly tell Buddy the problem and ask the right next-step questions.",
+          "From fixture repairs to water heater help, Buddy handles many of the plumbing problems homeowners want fixed quickly and clearly.",
         primaryCta: { label: "Call About the Plumbing Issue", href: getCallHref() },
         secondaryCta: { label: "Text the Problem", href: getTextHref() },
       }}
     >
       <${Section}
         id="typical-jobs"
-        title="Examples this page should speak to"
-        lead="Keep the copy specific enough to feel helpful but simple enough to read quickly on a phone."
+        title="Common plumbing jobs"
+        lead="Examples of repairs homeowners often call about:"
       >
         <div className="split-layout">
           <article className="card">
@@ -35,10 +35,10 @@ function PlumbingPage() {
           </article>
 
           <article className="card">
-            <h3>Project photo area</h3>
+            <h3>Recent work</h3>
             <div className="photo-grid">
-              <div className="photo-placeholder">Problem fixture photo placeholder</div>
-              <div className="photo-placeholder">Completed fix photo placeholder</div>
+              <div className="photo-placeholder">Before photo</div>
+              <div className="photo-placeholder">After photo</div>
             </div>
           </article>
         </div>

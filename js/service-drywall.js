@@ -16,7 +16,7 @@ function DrywallPage() {
         eyebrow: "Drywall and texture repair",
         title: "Repair wall damage without making the room feel torn apart.",
         lead:
-          "This service page is designed to capture wall repair searches and reassure homeowners that the repair, texture match, and finish details can all be handled in one conversation.",
+          "Patch wall damage, match texture, and get the room looking clean again with one clear plan.",
         primaryCta: { label: "Call About Wall Repair", href: getCallHref() },
         secondaryCta: { label: "Text the Job Details", href: getTextHref() },
       }}
@@ -24,21 +24,21 @@ function DrywallPage() {
       <${Section}
         id="typical-jobs"
         title="Typical drywall and texture jobs"
-        lead="Keep the copy focused on the problems homeowners actually describe when they call."
+        lead="Common drywall and texture repairs include the following:"
       >
         <div className="split-layout">
           <article className="card">
-            <h3>What this page should cover</h3>
+            <h3>Common drywall repairs</h3>
             <ul className="bullet-list">
               ${JOBS.map((item) => html`<li key=${item}>${item}</li>`)}
             </ul>
           </article>
 
           <article className="card">
-            <h3>Before and after proof</h3>
+            <h3>Recent work</h3>
             <div className="photo-grid">
-              <div className="photo-placeholder">Wall damage photo placeholder</div>
-              <div className="photo-placeholder">Finished repair photo placeholder</div>
+              <div className="photo-placeholder">Before photo</div>
+              <div className="photo-placeholder">After photo</div>
             </div>
           </article>
         </div>

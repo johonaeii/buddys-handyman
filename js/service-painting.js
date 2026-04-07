@@ -16,7 +16,7 @@ function PaintingPage() {
         eyebrow: "Interior and exterior painting",
         title: "Clean paint work with a clear plan before the job starts.",
         lead:
-          "This page supports painting leads by keeping the message simple: explain the room or surface, talk through timing, and get a straightforward next step.",
+          "From touch-ups to room refreshes, Buddy handles painting work with careful prep and clean finish details.",
         primaryCta: { label: "Call About Painting", href: getCallHref() },
         secondaryCta: { label: "Text the Paint Project", href: getTextHref() },
       }}
@@ -24,7 +24,7 @@ function PaintingPage() {
       <${Section}
         id="typical-jobs"
         title="Painting work people usually ask about"
-        lead="Use homeowner language and keep the page focused on practical, visible improvements."
+        lead="Common painting projects include the following:"
       >
         <div className="split-layout">
           <article className="card">
@@ -35,10 +35,10 @@ function PaintingPage() {
           </article>
 
           <article className="card">
-            <h3>Photo slots for real projects</h3>
+            <h3>Recent work</h3>
             <div className="photo-grid">
-              <div className="photo-placeholder">Room before photo placeholder</div>
-              <div className="photo-placeholder">Room after photo placeholder</div>
+              <div className="photo-placeholder">Before photo</div>
+              <div className="photo-placeholder">After photo</div>
             </div>
           </article>
         </div>
