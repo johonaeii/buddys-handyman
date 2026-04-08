@@ -5,18 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Learn how Buddy's Handyman Services is structured to build trust, explain the process clearly, and support homeowners and family helpers."
+      content="Why Albuquerque and Rio Rancho homeowners trust Buddy's Handyman Services. Clear estimates, respectful service, and reliable follow-through."
     />
     <meta name="theme-color" content="#f5f3ee" />
     <script src="js/theme-init.js"></script>
-    <title>About Buddy's Handyman Services</title>
+    <title>About Buddy's Handyman Services | Trusted Local Handyman</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" type="image/png" href="/images/bhs-favicon.png?v=6" />
     <link rel="shortcut icon" href="/images/bhs-favicon.png?v=6" />
     <link rel="apple-touch-icon" href="/images/bhs-favicon.png?v=6" />
   </head>
   <body>
+    <form name="estimate-request" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="estimate-request" />
+      <input type="text" name="name" />
+      <input type="tel" name="phone" />
+      <input type="email" name="email" />
+      <input type="text" name="location" />
+      <input type="text" name="service" />
+      <textarea name="message"></textarea>
+      <input type="text" name="source" />
+      <input type="text" name="bot-field" />
+    </form>
     <div id="app"></div>
     <script type="module" src="js/about.js"></script>
+    <script src="js/analytics.js" defer></script>
   </body>
 </html>

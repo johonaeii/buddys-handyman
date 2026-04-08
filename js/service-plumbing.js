@@ -35,10 +35,11 @@ function PlumbingPage() {
           </article>
 
           <article className="card">
-            <h3>Recent work</h3>
-            <div className="photo-grid">
-              <div className="photo-placeholder">Before photo</div>
-              <div className="photo-placeholder">After photo</div>
+            <h3>Have a plumbing issue right now?</h3>
+            <p>Call or text with the symptoms and the fixture involved. Buddy can talk through it and let you know the best next step.</p>
+            <div className="action-row is-stacked">
+              <a className="btn btn-solid" href=${getCallHref()}>Call Buddy</a>
+              <a className="btn btn-ghost" href=${getTextHref()}>Text Buddy</a>
             </div>
           </article>
         </div>

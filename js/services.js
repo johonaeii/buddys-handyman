@@ -25,13 +25,12 @@ function ServicesPage() {
     <${SiteLayout}
       activePage="services"
       hero=${{
-        eyebrow: "Local handyman services",
-        title: "See what Buddy handles before you even make the call.",
+        eyebrow: "Handyman services in Albuquerque and Rio Rancho",
+        title: "See what Buddy handles — then call or text for an estimate.",
         lead:
-          "From small repairs to finish work, Buddy helps with the kinds of jobs homeowners need done carefully and clearly.",
-        primaryCta: { label: "Call to Talk It Through", href: getCallHref() },
-        secondaryCta: { label: "Jump to the Contact Page", href: "contact.html#estimate-form" },
-        note: "If you are not sure which service fits your project, call or text and ask.",
+          "From small repairs to finish work. Browse the services below or call Buddy directly to talk through your project.",
+        primaryCta: { label: "Call for a Free Estimate", href: getCallHref() },
+        secondaryCta: { label: "Request Estimate Online", href: "contact.html#estimate-form" },
       }}
     >
       <${Section}
@@ -66,8 +65,8 @@ function ServicesPage() {
       <//>
 
       <${ContactStrip}
-        title="Need help deciding where your project fits?"
-        text="Call first, describe the job in plain language, and Buddy can tell you the best next step."
+        title="Not sure where your project fits?"
+        text="Call or text Buddy. Describe the job in plain language and get a straight answer about the best next step."
         buttonLabel="Call Buddy Now"
         buttonHref=${getCallHref()}
       />

@@ -35,10 +35,11 @@ function PaintingPage() {
           </article>
 
           <article className="card">
-            <h3>Recent work</h3>
-            <div className="photo-grid">
-              <div className="photo-placeholder">Before photo</div>
-              <div className="photo-placeholder">After photo</div>
+            <h3>Not sure if it is a touch-up or a full repaint?</h3>
+            <p>Call or text Buddy with the room, the surface, and what you are hoping to improve. You will get a straightforward answer and a clear estimate.</p>
+            <div className="action-row is-stacked">
+              <a className="btn btn-solid" href=${getCallHref()}>Call Buddy</a>
+              <a className="btn btn-ghost" href=${getTextHref()}>Text Buddy</a>
             </div>
           </article>
         </div>

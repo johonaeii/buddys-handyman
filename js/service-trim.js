@@ -35,10 +35,11 @@ function TrimPage() {
           </article>
 
           <article className="card">
-            <h3>Recent work</h3>
-            <div className="photo-grid">
-              <div className="photo-placeholder">Before photo</div>
-              <div className="photo-placeholder">After photo</div>
+            <h3>Want the room to look finished?</h3>
+            <p>Call or text Buddy with the room, the trim issue, and whether materials are already on site. You will get a clear plan and estimate.</p>
+            <div className="action-row is-stacked">
+              <a className="btn btn-solid" href=${getCallHref()}>Call Buddy</a>
+              <a className="btn btn-ghost" href=${getTextHref()}>Text Buddy</a>
             </div>
           </article>
         </div>
