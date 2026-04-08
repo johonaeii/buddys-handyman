@@ -66,17 +66,17 @@ export const FORM_SERVICE_OPTIONS = [
 ];
 
 export const TRUST_PROMISES = [
-  "Phone-first scheduling for homeowners and family helpers",
-  "Straightforward estimates before work begins",
-  "Respectful work inside the home",
-  "Local service focused on Albuquerque and Rio Rancho",
+  "Free estimates by phone, text, or online form",
+  "Clear pricing before work begins",
+  "Respectful, careful work inside your home",
+  "Local to Albuquerque and Rio Rancho",
 ];
 
 const NAV_LINKS = [
   { id: "home", label: "Home", href: "index.html" },
   { id: "services", label: "Services", href: "services.html" },
   { id: "about", label: "About", href: "trust.html" },
-  { id: "contact", label: "Contact", href: "contact.html" },
+  { id: "contact", label: "Get an Estimate", href: "contact.html", highlight: true },
 ];
 
 const THEME_STORAGE_KEY = "bhs-theme";
@@ -217,7 +217,10 @@ function Header({ activePage }) {
                     (link) => html`
                       <li key=${link.id}>
                         <a
-                          className=${link.id === activePage ? "nav-link is-active" : "nav-link"}
+                          className=${[
+                            link.highlight ? "nav-link nav-link-cta" : "nav-link",
+                            link.id === activePage ? "is-active" : "",
+                          ].filter(Boolean).join(" ")}
                           href=${link.href}
                           aria-current=${link.id === activePage ? "page" : undefined}
                         >
@@ -262,7 +265,10 @@ function Header({ activePage }) {
                   (link) => html`
                     <li key=${link.id}>
                       <a
-                        className=${link.id === activePage ? "nav-link is-active" : "nav-link"}
+                        className=${[
+                          link.highlight ? "nav-link nav-link-cta" : "nav-link",
+                          link.id === activePage ? "is-active" : "",
+                        ].filter(Boolean).join(" ")}
                         href=${link.href}
                         aria-current=${link.id === activePage ? "page" : undefined}
                         onClick=${() => setIsMenuOpen(false)}

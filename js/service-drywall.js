@@ -35,10 +35,11 @@ function DrywallPage() {
           </article>
 
           <article className="card">
-            <h3>Recent work</h3>
-            <div className="photo-grid">
-              <div className="photo-placeholder">Before photo</div>
-              <div className="photo-placeholder">After photo</div>
+            <h3>Not sure what you need?</h3>
+            <p>Describe the wall damage over the phone or by text. Buddy can help figure out the right repair and give you a clear estimate before any work begins.</p>
+            <div className="action-row is-stacked">
+              <a className="btn btn-solid" href=${getCallHref()}>Call Buddy</a>
+              <a className="btn btn-ghost" href=${getTextHref()}>Text Buddy</a>
             </div>
           </article>
         </div>

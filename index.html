@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Buddy's Handyman Services helps Albuquerque and Rio Rancho homeowners with drywall repair, painting, tile, water heaters, trim work, and other handyman repairs."
+      content="Local handyman services in Albuquerque and Rio Rancho. Drywall, painting, tile, plumbing, trim, and general home repairs. Call or text for a free estimate."
     />
     <meta name="theme-color" content="#f5f3ee" />
+    <meta property="og:title" content="Buddy's Handyman Services | Albuquerque and Rio Rancho" />
+    <meta property="og:description" content="Reliable local handyman for drywall, painting, tile, plumbing, and trim. Free estimates by phone, text, or online form." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
     <script src="js/theme-init.js"></script>
-    <title>Buddy's Handyman Services | Reliable Repairs in Albuquerque and Rio Rancho</title>
+    <title>Buddy's Handyman Services | Local Handyman in Albuquerque and Rio Rancho</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" type="image/png" href="/images/bhs-favicon.png?v=6" />
     <link rel="shortcut icon" href="/images/bhs-favicon.png?v=6" />
@@ -17,12 +21,50 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "LocalBusiness",
+        "@type": "HomeAndConstructionBusiness",
         "name": "Buddy's Handyman Services",
         "telephone": "+15055550199",
         "url": "https://buddyshandyman.com/",
-        "areaServed": ["Albuquerque, New Mexico", "Rio Rancho, New Mexico"],
-        "description": "Handyman services for drywall repair, painting, tile, plumbing fixes, trim work, and general home repairs."
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "Albuquerque",
+            "addressRegion": "NM"
+          },
+          {
+            "@type": "City",
+            "name": "Rio Rancho",
+            "addressRegion": "NM"
+          }
+        ],
+        "description": "Local handyman services for drywall repair, painting, tile, plumbing, trim, and general home repairs in Albuquerque and Rio Rancho, New Mexico.",
+        "priceRange": "$$",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "08:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "08:00",
+            "closes": "18:00"
+          }
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Handyman Services",
+          "itemListElement": [
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Drywall and Texture Repair"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Interior and Exterior Painting"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Tile Repair and Installation"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Water Heater and Plumbing Repair"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Trim, Baseboards, and Finish Carpentry"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "General Handyman Repairs"}}
+          ]
+        }
       }
     </script>
   </head>
@@ -40,5 +82,6 @@
     </form>
     <div id="app"></div>
     <script type="module" src="js/home.js"></script>
+    <script src="js/analytics.js" defer></script>
   </body>
 </html>

@@ -14,35 +14,35 @@ import {
 
 const PROCESS_STEPS = [
   {
-    title: "1. Call or text",
-    text: "Tell Buddy what needs attention and share any details that would help with the estimate.",
+    title: "1. Call or text Buddy",
+    text: "Describe the repair or project in your own words. No forms required.",
   },
   {
     title: "2. Get a clear estimate",
-    text: "Talk through the repair, the next step, and the best timing for the job.",
+    text: "Buddy explains the work, the cost, and the timeline before anything starts.",
   },
   {
-    title: "3. Schedule the work",
-    text: "Once everything looks right, Buddy can get your project on the calendar.",
+    title: "3. Schedule the job",
+    text: "Pick a time that works. Buddy shows up on time and finishes the work right.",
   },
 ];
 
 const TRUST_FACTS = [
   {
-    title: "Easy to understand",
-    text: "Clear service descriptions and simple contact options make it easier to get started.",
+    title: "Clear estimates, no surprises",
+    text: "You know the cost and the plan before any work begins. If something changes, Buddy tells you first.",
   },
   {
-    title: "Helpful for family helpers",
-    text: "Adult children and caregivers can call, text, or send the estimate form for a parent or grandparent.",
+    title: "Built for families",
+    text: "Adult children and caregivers can call, text, or send the estimate form on behalf of a parent or grandparent.",
   },
   {
-    title: "Respectful service",
-    text: "Friendly communication, careful work, and clean-up matter on every job.",
+    title: "Respectful of your home",
+    text: "Clean work areas, careful handling, and a tidy finish every time.",
   },
   {
-    title: "Straightforward next steps",
-    text: "Call, text, or send the form and get a clear response about what to do next.",
+    title: "Easy to reach, easy to understand",
+    text: "Call or text and get a real person. No phone trees, no waiting days for a callback.",
   },
 ];
 
@@ -51,20 +51,20 @@ function HomePage() {
     <${SiteLayout}
       activePage="home"
       hero=${{
-        eyebrow: "Free estimates by phone or text",
-        title: "Handyman services you can trust in Albuquerque and Rio Rancho.",
+        eyebrow: "Free estimates — call or text today",
+        title: "Reliable handyman help in Albuquerque and Rio Rancho.",
         lead:
-          "Buddy's Handyman Services helps homeowners and family helpers get repairs moving without a confusing website or a long back-and-forth process.",
-        primaryCta: { label: "Call for an Estimate", href: getCallHref() },
+          "Drywall, painting, tile, plumbing, trim, and general repairs. Call or text for a free estimate from a local handyman who shows up on time and communicates clearly.",
+        primaryCta: { label: "Call for a Free Estimate", href: getCallHref() },
         secondaryCta: { label: "Text Buddy Now", href: getTextHref() },
-        note: "Prefer to send details online first? Scroll down and request an estimate in a few simple fields.",
+        note: "Or scroll down to send your project details online.",
         highlights: TRUST_PROMISES,
       }}
     >
       <${Section}
         id="services-summary"
-        title="Start with the most requested jobs"
-        lead="From wall repairs to trim work, these are some of the jobs homeowners ask about most often."
+        title="What Buddy can help with"
+        lead="From wall repairs to plumbing fixes, these are the jobs Albuquerque and Rio Rancho homeowners ask about most."
       >
         <div className="card-grid three-col">
           ${FEATURED_SERVICES.map(
@@ -75,17 +75,20 @@ function HomePage() {
                 title=${service.title}
                 text=${service.text}
                 href=${service.href}
-                linkLabel="See service details"
+                linkLabel="See details"
               />
             `,
           )}
+        </div>
+        <div className="section-cta">
+          <a className="text-link" href="services.html">See all services Buddy handles</a>
         </div>
       <//>
 
       <${Section}
         id="trust-flow"
-        title="How it works"
-        lead="From the first call to the finished job, the process stays simple and easy to understand."
+        title="Why families choose Buddy"
+        lead="Clear communication, honest estimates, and careful work. Here is how it works."
       >
         <div className="split-layout">
           <div className="stack-list">
@@ -114,8 +117,8 @@ function HomePage() {
 
       <${Section}
         id="estimate"
-        title="Request an estimate without the runaround"
-        lead="Call or text if that is easiest. You can also send the basics here and Buddy can follow up with the next step."
+        title="Request a free estimate"
+        lead="Call or text if that is easiest. You can also send the basics here and Buddy will follow up."
       >
         <div className="split-layout">
           <aside className="contact-panel">

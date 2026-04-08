@@ -2,6 +2,7 @@ import { html } from "./react-lib.js";
 import {
   COMPANY,
   ContactStrip,
+  EstimateForm,
   InfoCard,
   Section,
   SiteLayout,
@@ -13,30 +14,34 @@ import {
 const STORY_POINTS = [
   {
     title: "Local and dependable",
-    text: "Buddy's Handyman Services is centered on clear communication, dependable scheduling, and careful work from start to finish.",
+    text: "Buddy's Handyman Services is a local operation built on showing up when promised, communicating clearly, and doing careful work from start to finish.",
   },
   {
     title: "Helpful for homeowners and families",
-    text: "Homeowners, adult children, and caregivers can all reach out to ask questions and coordinate repairs.",
+    text: "Whether you are the homeowner or an adult child coordinating repairs for a parent, Buddy makes it easy to ask questions, get a clear estimate, and schedule the work.",
+  },
+  {
+    title: "No job is too small",
+    text: "A leaky faucet, a scuffed wall, a loose baseboard. Many handyman services skip small jobs. Buddy handles them all with the same care.",
   },
 ];
 
 const TRUST_POINTS = [
   {
-    title: "Clear estimates",
-    text: "Talk through the job, ask questions, and understand the next step before work begins.",
+    title: "Clear estimates before work begins",
+    text: "You will know the scope, the cost, and the timeline before Buddy picks up a tool. No surprises.",
   },
   {
-    title: "Respectful service",
-    text: "Friendly communication, careful work, and a clean finish matter on every job.",
+    title: "Respectful of your home",
+    text: "Clean work areas, careful handling, and a tidy finish. Your home is treated the way you would treat it.",
   },
   {
-    title: "Licensed and insured",
-    text: "Business details, coverage information, and other credentials can be shared as soon as they are finalized.",
+    title: "Easy to reach",
+    text: "Call or text and get a real answer. No phone trees, no automated runaround, no waiting days for a callback.",
   },
   {
-    title: "Local service area",
-    text: "Serving Albuquerque and Rio Rancho with practical repair help for everyday home projects.",
+    title: "Local to Albuquerque and Rio Rancho",
+    text: "Buddy lives and works in the community. Shorter response times, familiar with local homes, and accountable to neighbors.",
   },
 ];
 
@@ -46,20 +51,19 @@ function AboutPage() {
       activePage="about"
       hero=${{
         eyebrow: "About Buddy's Handyman Services",
-        title: "Trust is easier when the next step is clear.",
+        title: "A local handyman you can trust with your home.",
         lead:
-          "Buddy's Handyman Services is built around clear communication, dependable service, and careful work in the home.",
-        primaryCta: { label: "Call Buddy", href: getCallHref() },
-        secondaryCta: { label: "Text Buddy", href: getTextHref() },
-        note: "Clear communication, careful work, and dependable follow-through matter on every job.",
+          "Buddy's Handyman Services helps Albuquerque and Rio Rancho homeowners get repairs done right, with honest communication and respect for your home.",
+        primaryCta: { label: "Call for an Estimate", href: getCallHref() },
+        secondaryCta: { label: "Text Buddy Now", href: getTextHref() },
       }}
     >
       <${Section}
         id="story"
         title="Straightforward, neighborly service"
-        lead="Home repair should feel simple and comfortable from the first call."
+        lead="Home repair should feel simple and comfortable from the first call to the finished job."
       >
-        <div className="card-grid two-col">
+        <div className="card-grid three-col">
           ${STORY_POINTS.map(
             (item) => html`<${InfoCard} key=${item.title} title=${item.title} text=${item.text} />`,
           )}
@@ -75,77 +79,46 @@ function AboutPage() {
           ${TRUST_POINTS.map(
             (item) => html`<${InfoCard} key=${item.title} title=${item.title} text=${item.text} />`,
           )}
-          ${COMPANY.licenseLabel
-            ? html`
-                <article className="card">
-                  <h3>License information</h3>
-                  <p>${COMPANY.licenseLabel}</p>
-                  <a className="text-link" href=${COMPANY.licenseUrl} target="_blank" rel="noreferrer">
-                    Verify with New Mexico RLD
-                  </a>
-                </article>
-              `
-            : html`
-                <article className="card">
-                  <h3>License information</h3>
-                  <p>License details available on request.</p>
-                </article>
-              `}
-          ${COMPANY.warrantyLabel
-            ? html`
-                <article className="card">
-                  <h3>Warranty or workmanship coverage</h3>
-                  <p>${COMPANY.warrantyLabel}</p>
-                </article>
-              `
-            : html`
-                <article className="card">
-                  <h3>Workmanship coverage</h3>
-                  <p>Warranty details available on request.</p>
-                </article>
-              `}
         </div>
       <//>
 
       <${Section}
-        id="reviews"
-        title="Reviews and project photos"
-        lead="Customer feedback and project photos help show the quality of the work."
+        id="estimate"
+        title="Ready to talk about a repair?"
+        lead="Call, text, or fill out the form and Buddy will follow up with a clear next step."
       >
         <div className="split-layout">
-          <article className="card">
-            <h3>Customer reviews</h3>
-            <p>
-              Customer reviews help homeowners feel comfortable before they call.
-            </p>
-            ${COMPANY.googleReviewsUrl
-              ? html`
-                  <a className="btn btn-ghost" href=${COMPANY.googleReviewsUrl} target="_blank" rel="noreferrer">
-                    See Reviews on Google
-                  </a>
-                `
-              : html`<p className="inline-note">Recent customer feedback will appear here.</p>`}
-          </article>
+          <aside className="contact-panel">
+            <p className="panel-eyebrow">Quick contact</p>
+            <h3>Talk to Buddy directly</h3>
+            <p>${COMPANY.responseLine}</p>
 
-          <article className="card">
-            <h3>Recent project photos</h3>
-            <p>
-              Project photos can show repair quality, finished work, and the kinds of jobs Buddy handles most often.
-            </p>
-            <div className="photo-grid">
-              <div className="photo-placeholder">Project photo</div>
-              <div className="photo-placeholder">Finished result</div>
+            <div className="action-row is-stacked">
+              <a className="btn btn-solid" href=${getCallHref()}>Call ${COMPANY.phoneDisplay}</a>
+              <a className="btn btn-ghost" href=${getTextHref()}>Text ${COMPANY.textDisplay}</a>
             </div>
-          </article>
+
+            <div className="detail-list">
+              <div>
+                <strong>Service area</strong>
+                <span>${COMPANY.cityLine}</span>
+              </div>
+              ${COMPANY.businessHours.map(
+                (item, index) => html`
+                  <div key=${`${item}-${index}`}>
+                    <strong>${index === 0 ? "Hours" : " "}</strong>
+                    <span>${item}</span>
+                  </div>
+                `,
+              )}
+            </div>
+          </aside>
+
+          <div>
+            <${EstimateForm} contextLabel="About Page" submitLabel="Request Free Estimate" />
+          </div>
         </div>
       <//>
-
-      <${ContactStrip}
-        title="Have a job you'd like to talk through?"
-        text="Call or text Buddy and explain what needs to be done."
-        buttonLabel="Contact Buddy"
-        buttonHref="contact.html"
-      />
     <//>
   `;
 }

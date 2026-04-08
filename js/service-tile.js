@@ -35,10 +35,11 @@ function TilePage() {
           </article>
 
           <article className="card">
-            <h3>Recent work</h3>
-            <div className="photo-grid">
-              <div className="photo-placeholder">Before photo</div>
-              <div className="photo-placeholder">After photo</div>
+            <h3>Have a tile problem you want fixed?</h3>
+            <p>Tell Buddy the room, the size of the area, and whether you already have the tile. You will get a clear estimate and a plan before any work starts.</p>
+            <div className="action-row is-stacked">
+              <a className="btn btn-solid" href=${getCallHref()}>Call Buddy</a>
+              <a className="btn btn-ghost" href=${getTextHref()}>Text Buddy</a>
             </div>
           </article>
         </div>

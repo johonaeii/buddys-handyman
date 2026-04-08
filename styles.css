@@ -259,6 +259,18 @@ textarea,
   border-color: rgba(37, 97, 116, 0.16);
 }
 
+.nav-link-cta {
+  background: var(--brand);
+  color: #ffffff;
+  border-color: rgba(37, 97, 116, 0.26);
+}
+
+.nav-link-cta:hover,
+.nav-link-cta.is-active {
+  background: var(--brand-strong);
+  color: #ffffff;
+}
+
 .action-row {
   display: flex;
   flex-wrap: wrap;
@@ -674,6 +686,15 @@ h3 {
   background: rgba(37, 97, 116, 0.08);
   color: var(--brand-strong);
   font-weight: 700;
+}
+
+.section-cta {
+  margin-top: 1.2rem;
+  text-align: center;
+}
+
+.section-cta .text-link {
+  font-size: 1.08rem;
 }
 
 .estimate-form {

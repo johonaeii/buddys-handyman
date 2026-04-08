@@ -8,3 +8,8 @@
   from = "/reviews.html"
   to = "/trust.html"
   status = 301
+
+[[redirects]]
+  from = "/resources.html"
+  to = "/"
+  status = 301

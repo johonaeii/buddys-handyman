@@ -14,19 +14,19 @@ function ContactPage() {
     <${SiteLayout}
       activePage="contact"
       hero=${{
-        eyebrow: "Contact Buddy's Handyman Services",
-        title: "Call, text, or send the estimate form.",
+        eyebrow: "Get a free estimate",
+        title: "Call, text, or send the form. It is that simple.",
         lead:
-          "Choose the contact option that feels easiest and send over the basics of your project.",
-        primaryCta: { label: "Call Buddy", href: getCallHref() },
+          "Choose whatever is easiest for you. Buddy responds to most inquiries within a few hours during business hours.",
+        primaryCta: { label: "Call Now", href: getCallHref() },
         secondaryCta: { label: "Text Buddy", href: getTextHref() },
-        note: "If a family member is helping with the repair, they can use this form too.",
+        note: "A family member helping with the repair? They can use this page too.",
       }}
     >
       <${Section}
         id="contact-options"
-        title="Choose the easiest way to start"
-        lead="Call, text, or send the estimate form. Whatever is easiest for you is fine."
+        title="Three easy ways to reach Buddy"
+        lead="Pick whatever feels most comfortable. All three get you the same fast response."
       >
         <div className="card-grid three-col">
           <article className="card">
@@ -51,8 +51,8 @@ function ContactPage() {
 
       <${Section}
         id="estimate-form"
-        title="Send the job details online"
-        lead="Share a few details about the job and Buddy can follow up with the next step."
+        title="Send your project details online"
+        lead="Fill out the basics and Buddy will follow up with a clear estimate."
       >
         <div className="split-layout">
           <aside className="contact-panel">
