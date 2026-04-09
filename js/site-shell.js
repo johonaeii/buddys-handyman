@@ -194,6 +194,7 @@ function Header({ activePage }) {
 
   const isDarkMode = theme === DARK_THEME;
   const toggleTheme = () => setTheme((currentTheme) => (currentTheme === DARK_THEME ? LIGHT_THEME : DARK_THEME));
+  const themeToggleLabel = isDarkMode ? "Switch to light mode" : "Switch to dark mode";
 
   return html`
     <header className="top-header">
@@ -236,57 +237,64 @@ function Header({ activePage }) {
                   )}
                 </ul>
               </nav>
-
-              <${ActionButtons} />
-
-              <button
-                className=${isDarkMode ? "theme-toggle is-active" : "theme-toggle"}
-                type="button"
-                aria-pressed=${isDarkMode}
-                onClick=${toggleTheme}
-              >
-                ${isDarkMode ? "Light mode" : "Dark mode"}
-              </button>
             </div>
 
-            <button
-              className="nav-toggle"
-              type="button"
-              aria-expanded=${isMenuOpen}
-              aria-controls="mobile-nav"
-              aria-label=${isMenuOpen ? "Close menu" : "Open menu"}
-              onClick=${() => setIsMenuOpen((open) => !open)}
-            >
-              <span></span>
-              <span></span>
-              <span></span>
-            </button>
+            <div className="header-controls">
+              <button
+                className=${isDarkMode ? "theme-toggle theme-toggle-icon is-active" : "theme-toggle theme-toggle-icon"}
+                type="button"
+                aria-pressed=${isDarkMode}
+                aria-label=${themeToggleLabel}
+                title=${isDarkMode ? "Light mode" : "Dark mode"}
+                onClick=${toggleTheme}
+              >
+                <span className="theme-switch" aria-hidden="true">
+                  <span className="theme-switch-thumb"></span>
+                </span>
+                <span className="sr-only">${themeToggleLabel}</span>
+              </button>
+
+              <button
+                className="nav-toggle"
+                type="button"
+                aria-expanded=${isMenuOpen}
+                aria-controls="site-drawer"
+                aria-label=${isMenuOpen ? "Close menu" : "Open menu"}
+                onClick=${() => setIsMenuOpen((open) => !open)}
+              >
+                <span></span>
+                <span></span>
+                <span></span>
+              </button>
+            </div>
           </div>
 
-          <div id="mobile-nav" className=${isMenuOpen ? "nav-drawer is-open" : "nav-drawer"}>
-            <nav aria-label="Mobile primary">
-              <ul className="nav-list is-mobile">
-                ${NAV_LINKS.map(
-                  (link) => html`
-                    <li key=${link.id}>
-                      <a
-                        className=${link.id === activePage ? "nav-link is-active" : "nav-link"}
-                        href=${link.href}
-                        aria-current=${link.id === activePage ? "page" : undefined}
-                        onClick=${() => setIsMenuOpen(false)}
-                      >
-                        ${link.label}
-                      </a>
-                    </li>
-                  `,
-                )}
-              </ul>
-            </nav>
+          <div id="site-drawer" className=${isMenuOpen ? "nav-drawer is-open" : "nav-drawer"}>
+            <div className="nav-drawer-primary">
+              <nav aria-label="Mobile primary">
+                <ul className="nav-list is-mobile">
+                  ${NAV_LINKS.map(
+                    (link) => html`
+                      <li key=${link.id}>
+                        <a
+                          className=${link.id === activePage ? "nav-link is-active" : "nav-link"}
+                          href=${link.href}
+                          aria-current=${link.id === activePage ? "page" : undefined}
+                          onClick=${() => setIsMenuOpen(false)}
+                        >
+                          ${link.label}
+                        </a>
+                      </li>
+                    `,
+                  )}
+                </ul>
+              </nav>
+            </div>
 
             <div className="nav-drawer-actions">
               <${ActionButtons} stacked=${true} />
               <button
-                className=${isDarkMode ? "theme-toggle is-active" : "theme-toggle"}
+                className=${isDarkMode ? "theme-toggle nav-drawer-theme is-active" : "theme-toggle nav-drawer-theme"}
                 type="button"
                 aria-pressed=${isDarkMode}
                 onClick=${toggleTheme}

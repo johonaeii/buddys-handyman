@@ -239,8 +239,20 @@ ol {
 .header-desktop-tools {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  justify-content: center;
+  flex: 1 1 auto;
   min-width: 0;
+}
+
+.desktop-nav {
+  min-width: 0;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 0 0 auto;
 }
 
 .desktop-nav .nav-list {
@@ -306,6 +318,48 @@ textarea {
 
 :root[data-theme="dark"] .theme-toggle {
   background: rgba(255, 255, 255, 0.04);
+}
+
+.theme-toggle-icon {
+  display: none;
+  width: 2.9rem;
+  min-width: 2.9rem;
+  padding: 0;
+}
+
+.theme-switch {
+  position: relative;
+  display: block;
+  width: 1.55rem;
+  height: 0.92rem;
+  border-radius: 999px;
+  border: 1px solid rgba(var(--accent-rgb), 0.18);
+  background: rgba(var(--accent-rgb), 0.14);
+}
+
+.theme-switch-thumb {
+  position: absolute;
+  top: 50%;
+  left: 0.14rem;
+  width: 0.52rem;
+  height: 0.52rem;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+  transform: translateY(-50%);
+  transition:
+    transform 0.18s ease,
+    background-color 0.18s ease;
+}
+
+.theme-toggle-icon.is-active .theme-switch {
+  background: rgba(var(--brand-rgb), 0.2);
+  border-color: rgba(var(--brand-rgb), 0.24);
+}
+
+.theme-toggle-icon.is-active .theme-switch-thumb {
+  background: var(--brand);
+  transform: translate(0.7rem, -50%);
 }
 
 .action-row {
@@ -380,7 +434,8 @@ button:disabled,
 }
 
 .nav-toggle {
-  display: none;
+  display: inline-grid;
+  place-items: center;
   width: 2.9rem;
   height: 2.9rem;
   padding: 0;
@@ -405,6 +460,29 @@ button:disabled,
 }
 
 .nav-drawer {
+  display: block;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  border-top: 1px solid transparent;
+  padding: 0 1rem;
+  transition:
+    max-height 0.24s ease,
+    opacity 0.18s ease,
+    padding 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.nav-drawer.is-open {
+  max-height: 28rem;
+  opacity: 1;
+  visibility: visible;
+  border-top-color: var(--line);
+  padding: 0 1rem 1rem;
+}
+
+.nav-drawer-primary {
   display: none;
 }
 
@@ -418,6 +496,14 @@ button:disabled,
   display: grid;
   gap: 0.75rem;
   margin-top: 0.85rem;
+  width: min(100%, 16rem);
+  margin-left: auto;
+}
+
+.nav-drawer .nav-link,
+.nav-drawer .btn,
+.nav-drawer .theme-toggle {
+  width: 100%;
 }
 
 .site-shell {
@@ -987,47 +1073,36 @@ textarea::placeholder {
   }
 }
 
-@media (max-width: 1160px) {
+@media (max-width: 920px) {
   .header-desktop-tools {
     display: none;
   }
 
-  .nav-toggle {
-    display: inline-grid;
-    place-items: center;
+  .header-controls {
+    gap: 0.45rem;
   }
 
-  .nav-drawer {
-    display: block;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    visibility: hidden;
-    border-top: 1px solid transparent;
-    padding: 0 1rem;
-    transition:
-      max-height 0.24s ease,
-      opacity 0.18s ease,
-      padding 0.18s ease,
-      border-color 0.18s ease;
+  .theme-toggle-icon {
+    display: inline-flex;
   }
 
   .nav-drawer.is-open {
-    max-height: 28rem;
-    opacity: 1;
-    visibility: visible;
-    border-top-color: var(--line);
-    padding: 0 1rem 1rem;
+    max-height: 36rem;
   }
 
-  .nav-drawer .nav-link,
-  .nav-drawer .btn,
-  .nav-drawer .theme-toggle {
+  .nav-drawer-primary {
+    display: block;
+  }
+
+  .nav-drawer-actions {
     width: 100%;
+    margin-left: 0;
   }
-}
 
-@media (max-width: 920px) {
+  .nav-drawer-theme {
+    display: none;
+  }
+
   .hero-shell,
   .split-layout,
   .cta-band,
@@ -1086,6 +1161,14 @@ textarea::placeholder {
   .hero-shell {
     padding: 1.15rem;
     border-radius: 1.6rem;
+  }
+
+  .nav-drawer {
+    padding-inline: 0.85rem;
+  }
+
+  .nav-drawer.is-open {
+    padding: 0 0.85rem 1rem;
   }
 
   .hero-actions,
