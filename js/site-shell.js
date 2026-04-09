@@ -112,7 +112,7 @@ function applyTheme(theme) {
 
   const themeColorMeta = document.querySelector('meta[name="theme-color"]');
   if (themeColorMeta) {
-    themeColorMeta.setAttribute("content", nextTheme === LIGHT_THEME ? "#f5f3ee" : "#0f2027");
+    themeColorMeta.setAttribute("content", nextTheme === LIGHT_THEME ? "#f7f9fc" : "#0f1722");
   }
 
   try {
@@ -202,7 +202,15 @@ function Header({ activePage }) {
           <div className="header-row">
             <a className="brand" href="index.html" aria-label="Buddy's Handyman Services home">
               <span className="brand-mark" aria-hidden="true">
-                <img className="brand-logo" src="images/bhs-favicon.png" alt="" />
+                <img
+                  className="brand-logo"
+                  src="images/bhs-favicon.png"
+                  alt=""
+                  width="1010"
+                  height="993"
+                  decoding="async"
+                  fetchpriority="high"
+                />
               </span>
               <span className="brand-copy">
                 <strong>${COMPANY.name}</strong>
