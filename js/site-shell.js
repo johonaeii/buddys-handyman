@@ -112,7 +112,7 @@ function applyTheme(theme) {
 
   const themeColorMeta = document.querySelector('meta[name="theme-color"]');
   if (themeColorMeta) {
-    themeColorMeta.setAttribute("content", nextTheme === LIGHT_THEME ? "#fbf4ea" : "#221613");
+    themeColorMeta.setAttribute("content", nextTheme === LIGHT_THEME ? "#f5f7fa" : "#14181e");
   }
 
   try {
