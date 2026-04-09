@@ -1073,6 +1073,28 @@ textarea::placeholder {
   }
 }
 
+@media (min-width: 921px) {
+  .nav-drawer-actions {
+    width: 100%;
+    margin-left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+  }
+
+  .nav-drawer-actions .action-row.is-stacked {
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  .nav-drawer .btn,
+  .nav-drawer .theme-toggle {
+    width: auto;
+    white-space: nowrap;
+  }
+}
+
 @media (max-width: 920px) {
   .header-desktop-tools {
     display: none;
